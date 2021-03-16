@@ -1,0 +1,66 @@
+name: luconductora
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.0
+  bouncing_widget: ^1.2.3
+  beauty_textfield: ^0.0.1
+  datetime_picker_formfield: ^2.0.0
+  intl: ^0.17.0
+  pin_code_fields: ^6.1.0
+  image_picker: ^0.7.2+1
+  firebase_storage: ^8.0.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/mobilefacenet.tflite
+    - assets/Logo/Logo_lala_app.png
+    - assets/Logo/Lu_logo.png
+    - assets/Logo/Conductora.png
+    - assets/Logo/Usuaria.png
+  fonts:
+    - family: Gotham
+      fonts: 
+        - asset: fonts/GothamRounded-Bold.otf
+        - asset: fonts/GothamRounded-BoldItalic.otf
+        - asset: fonts/GothamRounded-Book.otf
+        - asset: fonts/GothamRounded-BookItalic.otf
+        - asset: fonts/GothamRounded-Light.otf
+        - asset: fonts/GothamRounded-LightItalic.otf
+        - asset: fonts/GothamRounded-Medium.otf
+        - asset: fonts/GothamRounded-MediumItalic.otf
+        - asset: fonts/GothamRoundedBold_21016.ttf
+        - asset: fonts/GothamRoundedBook_21018.ttf
+        - asset: fonts/GothamRoundedLight_21020.ttf
+        - asset: fonts/GothamRoundedMedium_21022.ttf
