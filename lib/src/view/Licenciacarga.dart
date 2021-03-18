@@ -1,7 +1,4 @@
-
-
 import 'dart:io';
-
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -36,13 +33,15 @@ class _LicenciaConduccionState extends State<LicenciaConduccion> {
 
   Widget imagen() {
     return Center(
-      child: Container(
+      child: Container(        
         child: Column(
           children: <Widget>[
             CircleAvatar(
-              backgroundColor: Colors.purple,
+              backgroundColor: Color.fromRGBO(101, 79, 168, 1),
               radius: 100,
-              backgroundImage: AssetImage('assets/Logo/Conductora.png'),
+              backgroundImage: licenceImage == null
+                  ? AssetImage('assets/Logo/Conductora.png')
+                  : FileImage(File(licenceImage.path)),
             ),
             Positioned(
               bottom: 20,
@@ -73,15 +72,16 @@ class _LicenciaConduccionState extends State<LicenciaConduccion> {
   }
 
   Widget botonFoto() {
-    return Container(
+    return Container(     
+      color: Color.fromRGBO(207, 197, 239, 1), 
       height: 100,
       width: MediaQuery.of(context).size.width,
       child: Column(
-        children: <Widget>[
+        children: <Widget>[          
           Text(
             'Sube tu licencia',
             style: TextStyle(
-              color: Color.fromRGBO(40, 1, 102, 1),
+              color: Color.fromRGBO(101, 79, 168, 1),
               fontWeight: FontWeight.w400,
               fontSize: height / 50,
             ),
@@ -93,18 +93,34 @@ class _LicenciaConduccionState extends State<LicenciaConduccion> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               FlatButton.icon(
-                icon: Icon(Icons.camera),
+                icon: Icon(Icons.camera,
+                color: Color.fromRGBO(101, 79, 168, 1),),
                 onPressed: () {
                   tomarFoto(ImageSource.camera);
                 },
-                label: Text('Camara'),
+                label: Text(
+                  'Camara',
+                  style: TextStyle(
+                    color: Color.fromRGBO(101, 79, 168, 1),
+                    fontWeight: FontWeight.w400,
+                    fontSize: height / 50,
+                  ),
+                ),
               ),
               FlatButton.icon(
-                icon: Icon(Icons.image),
+                icon: Icon(Icons.image, 
+                color: Color.fromRGBO(101, 79, 168, 1),),
                 onPressed: () {
                   tomarFoto(ImageSource.gallery);
                 },
-                label: Text('Galeria'),
+                label: Text(
+                  'Galeria',
+                  style: TextStyle(
+                    color: Color.fromRGBO(101, 79, 168, 1),
+                    fontWeight: FontWeight.w400,
+                    fontSize: height / 50,
+                  ),
+                ),
               ),
             ],
           )

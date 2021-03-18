@@ -1,3 +1,4 @@
+import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:luconductora/src/model/Document.model.dart';
 import 'package:luconductora/src/view/Licenciacarga.dart';
@@ -60,6 +61,27 @@ class _LicenciaDriverState extends State<LicenciaDriver> {
                     ),
                   ),
                   Container(
+                    height: height / 6,
+                    child: Center(
+                      child: SizedBox(
+                          width: width / 2,
+                          child: Container(
+                              alignment: Alignment.center,
+                              height: height / 9,
+                              width: width / 9,
+                              decoration: new BoxDecoration(
+                                color: Color.fromRGBO(101, 79, 168, 1),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: Image.asset(
+                                  'assets/Logo/Conductora.png',
+                                  height: height / 11.5,
+                                ),
+                              )),
+                    ))
+                  ),
+                  Container(
                     margin: EdgeInsets.all(20),
                     child: Center(
                       child: Text(
@@ -73,6 +95,7 @@ class _LicenciaDriverState extends State<LicenciaDriver> {
                       ),
                     ),
                   ),
+                  
                   Container(
                     height: height / 1.5,
                     width: width,
@@ -86,34 +109,50 @@ class _LicenciaDriverState extends State<LicenciaDriver> {
                               setState(() {
                                 switch (index) {
                                   case 0:
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => LicenciaConduccion()));
-                                  break;
-                                 case 1:
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => SoatCarga()));
-                                  break;
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                LicenciaConduccion()));
+                                    break;
+                                  case 1:
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => SoatCarga()));
+                                    break;
                                   case 2:
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => TarjetaPcarga()));
-                                  break;
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                TarjetaPcarga()));
+                                    break;
                                   case 3:
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => TecnoMcarga()));
-                                  break;
-                                  
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                TecnoMcarga()));
+                                    break;
                                 }
-                                                              
-                                                            });                              
+                              });
                             },
-                            title: Text(Documentos[index].nombreDocumento,
-                            style: TextStyle(
-                              color: Color.fromRGBO(40, 1, 102, 1),
-                            ),),
+                            title: Text(
+                              Documentos[index].nombreDocumento,
+                              style: TextStyle(
+                                color: Color.fromRGBO(40, 1, 102, 1),
+                              ),
+                            ),
                             subtitle:
                                 Text(Documentos[index].descripcionDocumento),
                             trailing: Icon(Icons.arrow_forward_ios),
                           );
                         },
                       ),
+                      
                     ),
-                  )
+                  ),  
                 ],
               ),
             ),
