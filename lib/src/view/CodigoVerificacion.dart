@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:luconductora/src/view/DatosPersonal.dart';
+import 'package:luconductora/src/service/AuthService.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 
@@ -95,10 +95,8 @@ class _CodigoVerificacionDriverState extends State<CodigoVerificacionDriver> {
                   duration: Duration(milliseconds: 100),
                   scaleFactor: 1.5,
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DatosPersonal()));
+                    DriverService authService = DriverService();
+                    authService.signInWithPhoneNumber(currentText, context);
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(

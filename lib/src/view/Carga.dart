@@ -2,8 +2,8 @@ import 'package:luconductora/src/model/Driver.model.dart';
 import 'package:luconductora/src/service/AuthService.dart';
 import 'package:luconductora/src/service/DriverCollectionService.dart';
 import 'package:luconductora/src/service/DriverSharePreferences.dart';
+import 'package:luconductora/src/view/ConductoraLogin.dart';
 import 'package:luconductora/src/view/SignIn.dart';
-import 'package:luconductora/src/view/homepage.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -34,7 +34,7 @@ class _CargaState extends State<Carga> {
 
             if (value == null || value.isAnonymous || !user.exists) {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HomeDriver()));
+                  MaterialPageRoute(builder: (context) => ConductoraLogin()));
             } else {
               UserSharePreference userSharePreference = UserSharePreference();
               userSharePreference.getUser().then((value) async {

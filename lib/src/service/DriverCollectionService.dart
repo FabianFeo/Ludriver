@@ -10,12 +10,12 @@ class UserCollectionService {
     userSharePreference.saveUser();
     return firestore
         //deberia cambiarse a drivers???
-        .collection('users')
+        .collection('drivers')
         .doc(usuario.userUuid)
         .set(usuario.toMap());
   }
 
   Future<DocumentSnapshot> getUser(String uiid) {
-    return firestore.collection('users').doc(uiid).get();
+    return firestore.collection('drivers').doc(uiid).get();
   }
 }

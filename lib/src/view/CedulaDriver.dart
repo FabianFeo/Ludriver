@@ -146,7 +146,9 @@ class _CedulaDriverState extends State<CedulaDriver> {
                           child: Container(
                             child: Center(
                               child: Text(
-                                'Fecha de Expedición',
+                                user.expeditionDate == null
+                                    ? 'Fecha de expedicion'
+                                    : user.expeditionDate,
                                 style: TextStyle(
                                     color: Color.fromRGBO(101, 79, 168, 1),
                                     fontSize: height / 42,

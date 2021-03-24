@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:luconductora/src/service/AuthService.dart';
 import 'package:luconductora/src/view/CodigoVerificacion.dart';
 import 'package:flutter/material.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
@@ -75,11 +76,20 @@ class _ConductoraLoginState extends State<ConductoraLogin> {
                       duration: Duration(milliseconds: 100),
                       scaleFactor: 1.5,
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    CodigoVerificacionDriver()));
+                        DriverService authService = new DriverService();
+                        authService
+                            .registerUser(inputNumeroTelefono, context)
+                            .then(
+                          (value) {
+                            print(value);
+                            Navigator.of(context).pop();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        CodigoVerificacionDriver()));
+                          },
+                        );
                       },
                       child: Card(
                         shape: RoundedRectangleBorder(
