@@ -1,5 +1,4 @@
-import 'package:luconductora/src/view/homepage.dart';
-import 'package:luconductora/src/view/homepage.dart';
+import 'package:luconductora/src/view/Carga.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: HomeDriver(),
+      home: Carga(),
     );
   }
 }

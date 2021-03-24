@@ -37,5 +37,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+            <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDDjt2cJQi5BgxkYJZ7ZtrPTafZQICenXo" />
+            <meta-data android:name="com.google.mlkit.vision.DEPENDENCIES" android:value="face" />
+            <meta-data android:name="com.google.firebase.ml.vision.DEPENDENCIES" android:value="ocr" /> 
     </application>
 </manifest>

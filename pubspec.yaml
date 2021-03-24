@@ -26,13 +26,37 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.0
+  firebase_core: ^1.0.0
+  cloud_firestore: ^1.0.0
+  google_maps_flutter: ^2.0.1
+  flutter_verification_code: ^0.2.1
+  pin_code_fields: ^6.1.0
+  flare_flutter: ^2.0.6
   bouncing_widget: ^1.2.3
   beauty_textfield: ^0.0.1
+  image_picker: ^0.7.2+1
+  firebase_auth: ^1.0.1
+  camera: ^0.5.8+5
+  path_provider:
+  path:
+  firebase_ml_vision: ^0.9.6+2
+  image:
+  curved_navigation_bar: ^0.3.7
+  location: ^4.1.1
+  geolocator: ^7.0.1
+  http: ^0.13.1
+  google_place: ^0.4.0
   datetime_picker_formfield: ^2.0.0
   intl: ^0.17.0
-  pin_code_fields: ^6.1.0
-  image_picker: ^0.7.2+1
+  flutter_polyline_points: ^0.2.4
+  geocoder: ^0.2.1
+  slimy_card: ^1.0.4
+  video_player: ^2.0.2
   firebase_storage: ^8.0.0
+  shared_preferences: ^2.0.5
+  path_provider_windows: ^2.0.0
+  tflite_flutter: ^0.6.0
+  lite_rolling_switch: ^0.1.1
 
 
 dev_dependencies:
@@ -49,6 +73,7 @@ flutter:
     - assets/Logo/Lu_logo.png
     - assets/Logo/Conductora.png
     - assets/Logo/Usuaria.png
+    - assets/video/carga.mp4
   fonts:
     - family: Gotham
       fonts: 

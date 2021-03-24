@@ -33,7 +33,7 @@ class _LicenciaConduccionState extends State<LicenciaConduccion> {
 
   Widget imagen() {
     return Center(
-      child: Container(        
+      child: Container(
         child: Column(
           children: <Widget>[
             CircleAvatar(
@@ -72,12 +72,12 @@ class _LicenciaConduccionState extends State<LicenciaConduccion> {
   }
 
   Widget botonFoto() {
-    return Container(     
-      color: Color.fromRGBO(207, 197, 239, 1), 
+    return Container(
+      color: Color.fromRGBO(207, 197, 239, 1),
       height: 100,
       width: MediaQuery.of(context).size.width,
       child: Column(
-        children: <Widget>[          
+        children: <Widget>[
           Text(
             'Sube tu licencia',
             style: TextStyle(
@@ -93,8 +93,10 @@ class _LicenciaConduccionState extends State<LicenciaConduccion> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               FlatButton.icon(
-                icon: Icon(Icons.camera,
-                color: Color.fromRGBO(101, 79, 168, 1),),
+                icon: Icon(
+                  Icons.camera,
+                  color: Color.fromRGBO(101, 79, 168, 1),
+                ),
                 onPressed: () {
                   tomarFoto(ImageSource.camera);
                 },
@@ -108,8 +110,10 @@ class _LicenciaConduccionState extends State<LicenciaConduccion> {
                 ),
               ),
               FlatButton.icon(
-                icon: Icon(Icons.image, 
-                color: Color.fromRGBO(101, 79, 168, 1),),
+                icon: Icon(
+                  Icons.image,
+                  color: Color.fromRGBO(101, 79, 168, 1),
+                ),
                 onPressed: () {
                   tomarFoto(ImageSource.gallery);
                 },

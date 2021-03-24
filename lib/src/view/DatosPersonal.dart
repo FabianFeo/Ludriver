@@ -1,4 +1,4 @@
-import 'package:luconductora/src/model/User.model.dart';
+import 'package:luconductora/src/model/Driver.model.dart';
 import 'package:luconductora/src/view/CedulaDriver.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';

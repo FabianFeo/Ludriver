@@ -1,4 +1,3 @@
-import 'package:luconductora/src/view/CedulaDriver.dart';
 import 'package:flutter/material.dart';
 import 'package:luconductora/src/view/DatosPersonal.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';

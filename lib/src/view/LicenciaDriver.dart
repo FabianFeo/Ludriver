@@ -1,4 +1,3 @@
-import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:luconductora/src/model/Document.model.dart';
 import 'package:luconductora/src/view/Licenciacarga.dart';
@@ -13,7 +12,7 @@ class LicenciaDriver extends StatefulWidget {
   _LicenciaDriverState createState() => _LicenciaDriverState();
 }
 
-List<Documents> Documentos = [
+List<Documents> documentos = [
   Documents(
     'Licencia de conduccion',
     'Autorizacion para conduccion de vehiculos',
@@ -61,26 +60,25 @@ class _LicenciaDriverState extends State<LicenciaDriver> {
                     ),
                   ),
                   Container(
-                    height: height / 6,
-                    child: Center(
-                      child: SizedBox(
-                          width: width / 2,
-                          child: Container(
-                              alignment: Alignment.center,
-                              height: height / 9,
-                              width: width / 9,
-                              decoration: new BoxDecoration(
-                                color: Color.fromRGBO(101, 79, 168, 1),
-                                shape: BoxShape.circle,
+                      height: height / 6,
+                      child: Center(
+                          child: SizedBox(
+                        width: width / 2,
+                        child: Container(
+                            alignment: Alignment.center,
+                            height: height / 9,
+                            width: width / 9,
+                            decoration: new BoxDecoration(
+                              color: Color.fromRGBO(101, 79, 168, 1),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: Image.asset(
+                                'assets/Logo/Conductora.png',
+                                height: height / 11.5,
                               ),
-                              child: Center(
-                                child: Image.asset(
-                                  'assets/Logo/Conductora.png',
-                                  height: height / 11.5,
-                                ),
-                              )),
-                    ))
-                  ),
+                            )),
+                      ))),
                   Container(
                     margin: EdgeInsets.all(20),
                     child: Center(
@@ -95,14 +93,13 @@ class _LicenciaDriverState extends State<LicenciaDriver> {
                       ),
                     ),
                   ),
-                  
                   Container(
                     height: height / 1.5,
                     width: width,
                     margin: EdgeInsets.all(20),
                     child: Center(
                       child: ListView.builder(
-                        itemCount: Documentos.length,
+                        itemCount: documentos.length,
                         itemBuilder: (context, index) {
                           return ListTile(
                             onTap: () {
@@ -139,20 +136,19 @@ class _LicenciaDriverState extends State<LicenciaDriver> {
                               });
                             },
                             title: Text(
-                              Documentos[index].nombreDocumento,
+                              documentos[index].nombreDocumento,
                               style: TextStyle(
                                 color: Color.fromRGBO(40, 1, 102, 1),
                               ),
                             ),
                             subtitle:
-                                Text(Documentos[index].descripcionDocumento),
+                                Text(documentos[index].descripcionDocumento),
                             trailing: Icon(Icons.arrow_forward_ios),
                           );
                         },
                       ),
-                      
                     ),
-                  ),  
+                  ),
                 ],
               ),
             ),

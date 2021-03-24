@@ -1,6 +1,5 @@
 import 'package:luconductora/src/view/ConductoraLogin.dart';
 import 'package:flutter/material.dart';
-import '';
 
 class HomeDriver extends StatefulWidget {
   HomeDriver({Key key}) : super(key: key);
@@ -39,9 +38,9 @@ class _HomeDriverState extends State<HomeDriver> {
                       GestureDetector(
                         onTap: () => {
                           Navigator.push(
-                            context, 
-                            MaterialPageRoute(
-                              builder: (context)=> ConductoraLogin()))
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ConductoraLogin()))
                         },
                         child: SizedBox(
                           width: width / 2,
