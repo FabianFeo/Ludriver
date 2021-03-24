@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:luconductora/src/view/CodigoVerificacion.dart';
 import 'package:luconductora/src/view/CedulaDriver.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,9 @@ class _ConductoraLoginState extends State<ConductoraLogin> {
                           margin: EdgeInsets.only(left: width / 6),
                           width: width / 1.5,
                           child: TextField(
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
                             style: TextStyle(
                               fontSize: height / 30,
                             ),
@@ -73,9 +77,10 @@ class _ConductoraLoginState extends State<ConductoraLogin> {
                       scaleFactor: 1.5,
                       onPressed: () {
                         Navigator.push(
-                            context, 
+                            context,
                             MaterialPageRoute(
-                              builder: (context)=> CodigoVerificacionDriver()));
+                                builder: (context) =>
+                                    CodigoVerificacionDriver()));
                       },
                       child: Card(
                         shape: RoundedRectangleBorder(

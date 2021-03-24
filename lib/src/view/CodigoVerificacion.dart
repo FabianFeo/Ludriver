@@ -1,14 +1,15 @@
 import 'package:luconductora/src/view/CedulaDriver.dart';
 import 'package:flutter/material.dart';
+import 'package:luconductora/src/view/DatosPersonal.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
-
 
 class CodigoVerificacionDriver extends StatefulWidget {
   CodigoVerificacionDriver({Key key}) : super(key: key);
 
   @override
-  _CodigoVerificacionDriverState createState() => _CodigoVerificacionDriverState();
+  _CodigoVerificacionDriverState createState() =>
+      _CodigoVerificacionDriverState();
 }
 
 class _CodigoVerificacionDriverState extends State<CodigoVerificacionDriver> {
@@ -66,7 +67,7 @@ class _CodigoVerificacionDriverState extends State<CodigoVerificacionDriver> {
                     shape: PinCodeFieldShape.box,
                     borderRadius: BorderRadius.circular(5),
                     inactiveFillColor: Color.fromRGBO(230, 224, 237, 0.5),
-                    inactiveColor:  Color.fromRGBO(101, 79, 168, 1),
+                    inactiveColor: Color.fromRGBO(101, 79, 168, 1),
                     fieldWidth: 40,
                     selectedColor: Color.fromRGBO(101, 79, 168, 1),
                     selectedFillColor: Color.fromRGBO(225, 206, 239, 1),
@@ -96,9 +97,9 @@ class _CodigoVerificacionDriverState extends State<CodigoVerificacionDriver> {
                   scaleFactor: 1.5,
                   onPressed: () {
                     Navigator.push(
-                            context, 
-                            MaterialPageRoute(
-                              builder: (context)=> CedulaDriver()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DatosPersonal()));
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(
