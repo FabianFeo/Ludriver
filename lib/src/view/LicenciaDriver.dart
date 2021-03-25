@@ -168,14 +168,16 @@ class _LicenciaDriverState extends State<LicenciaDriver> {
                     duration: Duration(milliseconds: 100),
                     scaleFactor: 1.5,
                     onPressed: () {
-                      MaterialPageRoute(
-                          builder: (context) => ScannerRostro(
-                                cameraDescription: cameras.firstWhere(
-                                  (CameraDescription camera) =>
-                                      camera.lensDirection ==
-                                      CameraLensDirection.front,
-                                ),
-                              ));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ScannerRostro(
+                                    cameraDescription: cameras.firstWhere(
+                                      (CameraDescription camera) =>
+                                          camera.lensDirection ==
+                                          CameraLensDirection.front,
+                                    ),
+                                  )));
                     },
                     child: Card(
                       shape: RoundedRectangleBorder(
@@ -186,7 +188,7 @@ class _LicenciaDriverState extends State<LicenciaDriver> {
                         width: width / 2,
                         height: height / 20,
                         child: Text(
-                          "Verificar",
+                          "Continuar",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Color.fromRGBO(255, 255, 255, 1),
