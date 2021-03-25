@@ -1,7 +1,10 @@
 import 'package:luconductora/src/model/Driver.model.dart';
+import 'package:luconductora/src/service/DriverCollectionService.dart';
 import 'package:luconductora/src/service/cameraService.dart';
+import 'package:luconductora/src/service/databaseService.dart';
 import 'package:luconductora/src/service/faceNetService.dart';
 import 'package:luconductora/src/service/mlVisionService.dart';
+import 'package:luconductora/src/view/LicenciaDriver.dart';
 import 'package:luconductora/src/widgets/authActionButton.dart';
 import 'package:luconductora/src/widgets/facePainter.dart';
 import 'package:camera/camera.dart';
@@ -42,7 +45,7 @@ class _ScannerRostroState extends State<ScannerRostro> {
   MLVisionService _mlVisionService = MLVisionService();
   CameraService _cameraService = CameraService();
   FaceNetService _faceNetService = FaceNetService();
-
+  DataBaseService _dataBaseService = DataBaseService();
   @override
   void initState() {
     super.initState();
@@ -127,7 +130,18 @@ class _ScannerRostroState extends State<ScannerRostro> {
 
             if (_saving) {
               _faceNetService.setCurrentPrediction(image, faceDetected);
+              await this.saveCara().then((value) {
+                UserCollectionService userCollectionService =
+                    new UserCollectionService();
 
+                userCollectionService.pushUser().then((value) => {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  LicenciaDriver())) //index aqui
+                    });
+              });
               setState(() {
                 _saving = false;
               });
@@ -257,5 +271,20 @@ class _ScannerRostroState extends State<ScannerRostro> {
                 )
               : Container()),
     );
+  }
+
+  Future saveCara() async {
+    /// gets predicted data from facenet service (user face detected)
+    List predictedData = _faceNetService.predictedData;
+
+    /// creates a new user in the 'database'
+    await _dataBaseService.saveData(predictedData);
+    User user = User();
+    user.facePatern = predictedData;
+
+    /// resets the face stored in the face net sevice
+    this._faceNetService.setPredictedData(null);
+    //  Navigator.push(
+    //    context, MaterialPageRoute(builder: (BuildContext context) => Index()));
   }
 }
