@@ -130,18 +130,7 @@ class _ScannerRostroState extends State<ScannerRostro> {
 
             if (_saving) {
               _faceNetService.setCurrentPrediction(image, faceDetected);
-              await this.saveCara().then((value) {
-                UserCollectionService userCollectionService =
-                    new UserCollectionService();
-
-                userCollectionService.pushUser().then((value) => {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  LicenciaDriver())) //index aqui
-                    });
-              });
+    
               setState(() {
                 _saving = false;
               });
