@@ -4,6 +4,7 @@ import 'package:luconductora/src/service/faceNetService.dart';
 import 'package:luconductora/src/service/DriverCollectionService.dart';
 //import 'package:NoEstasSola/src/view/index.dart';
 import 'package:flutter/material.dart';
+import 'package:luconductora/src/view/Index.dart';
 
 class AuthActionButton extends StatefulWidget {
   AuthActionButton(
@@ -37,8 +38,8 @@ class _AuthActionButtonState extends State<AuthActionButton> {
 
     /// resets the face stored in the face net sevice
     this._faceNetService.setPredictedData(null);
-    //  Navigator.push(
-    //    context, MaterialPageRoute(builder: (BuildContext context) => Index()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (BuildContext context) => Index()));
   }
 
   @override
@@ -57,7 +58,11 @@ class _AuthActionButtonState extends State<AuthActionButton> {
           if (faceDetected) {
             widget.isLogin
                 ? loadFace(context)
-                : saveCara(context);
+                : saveCara(context).then((value) {
+                    UserCollectionService userCollectionService =
+                        UserCollectionService();
+                    userCollectionService.pushUser();
+                  });
           }
         } catch (e) {
           // If an error occurs, log the error to the console.
@@ -71,8 +76,8 @@ class _AuthActionButtonState extends State<AuthActionButton> {
     /// gets predicted data from facenet service (user face detected)
 
     if (_faceNetService.predict()) {
-      //Navigator.of(context).pop();
-      //  Navigator.push(context, MaterialPageRoute(builder: (context) => Index()));
+      Navigator.of(context).pop();
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Index()));
     }
   }
 
