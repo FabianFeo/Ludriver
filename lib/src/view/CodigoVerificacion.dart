@@ -26,7 +26,7 @@ class _CodigoVerificacionDriverState extends State<CodigoVerificacionDriver> {
     double width = MediaQuery.of(context).size.width;
     return Container(
         child: Scaffold(
-      backgroundColor: Color.fromRGBO(207, 197, 239, 1),
+      backgroundColor: Colors.white,
       body: Container(
         margin: EdgeInsets.only(top: height / 4),
         child: SingleChildScrollView(
@@ -74,14 +74,18 @@ class _CodigoVerificacionDriverState extends State<CodigoVerificacionDriver> {
                     activeFillColor: Color.fromRGBO(230, 224, 237, 0.5),
                   ),
                   animationDuration: Duration(milliseconds: 300),
-                  backgroundColor: Color.fromRGBO(207, 197, 239, 1),
+                  backgroundColor: Colors.white,
                   enableActiveFill: true,
                   errorAnimationController: errorController,
                   controller: textEditingController,
                   onCompleted: (v) {
                     print("Completed");
                   },
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    setState(() {
+                      currentText = value;
+                    });
+                  },
                   beforeTextPaste: (text) {
                     print("Allowing to paste $text");
                     //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.

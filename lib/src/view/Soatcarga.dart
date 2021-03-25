@@ -21,7 +21,7 @@ class _SoatCargaState extends State<SoatCarga> {
     width = MediaQuery.of(context).size.width;
     return Container(
       child: Scaffold(
-        backgroundColor: Color.fromRGBO(207, 197, 239, 1),
+        backgroundColor: Colors.white,
         body: Container(
           child: ListView(
             children: <Widget>[imagen()],
@@ -33,9 +33,17 @@ class _SoatCargaState extends State<SoatCarga> {
 
   Widget imagen() {
     return Center(
-      child: Container(        
+      child: Container(
         child: Column(
           children: <Widget>[
+            Text(
+              'SOAT',
+              style: TextStyle(
+                color: Color.fromRGBO(101, 79, 168, 1),
+                fontWeight: FontWeight.w400,
+                fontSize: height / 30,
+              ),
+            ),
             CircleAvatar(
               backgroundColor: Color.fromRGBO(101, 79, 168, 1),
               radius: 100,
@@ -72,12 +80,12 @@ class _SoatCargaState extends State<SoatCarga> {
   }
 
   Widget botonFoto() {
-    return Container(     
-      color: Color.fromRGBO(207, 197, 239, 1), 
+    return Container(
+      color: Color.fromRGBO(207, 197, 239, 1),
       height: 100,
       width: MediaQuery.of(context).size.width,
       child: Column(
-        children: <Widget>[          
+        children: <Widget>[
           Text(
             'Sube tu licencia',
             style: TextStyle(
@@ -93,8 +101,10 @@ class _SoatCargaState extends State<SoatCarga> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               FlatButton.icon(
-                icon: Icon(Icons.camera,
-                color: Color.fromRGBO(101, 79, 168, 1),),
+                icon: Icon(
+                  Icons.camera,
+                  color: Color.fromRGBO(101, 79, 168, 1),
+                ),
                 onPressed: () {
                   tomarFoto(ImageSource.camera);
                 },
@@ -108,8 +118,10 @@ class _SoatCargaState extends State<SoatCarga> {
                 ),
               ),
               FlatButton.icon(
-                icon: Icon(Icons.image, 
-                color: Color.fromRGBO(101, 79, 168, 1),),
+                icon: Icon(
+                  Icons.image,
+                  color: Color.fromRGBO(101, 79, 168, 1),
+                ),
                 onPressed: () {
                   tomarFoto(ImageSource.gallery);
                 },
