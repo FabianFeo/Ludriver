@@ -1,9 +1,13 @@
+import 'package:bouncing_widget/bouncing_widget.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:luconductora/src/model/Document.model.dart';
 import 'package:luconductora/src/view/Licenciacarga.dart';
 import 'package:luconductora/src/view/Soatcarga.dart';
 import 'package:luconductora/src/view/Tarjetapropiedadcarga.dart';
 import 'package:luconductora/src/view/Tecnocarga.dart';
+
+import 'ScannerCara.dart';
 
 class LicenciaDriver extends StatefulWidget {
   LicenciaDriver({Key key}) : super(key: key);
@@ -34,6 +38,18 @@ List<Documents> documentos = [
 class _LicenciaDriverState extends State<LicenciaDriver> {
   double height = 0;
   double width = 0;
+  List<CameraDescription> cameras;
+
+  @override
+  void initState() {
+    super.initState();
+    _startUp();
+  }
+
+  _startUp() async {
+    cameras = await availableCameras();
+  }
+
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
