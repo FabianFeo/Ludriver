@@ -110,7 +110,7 @@ class _LicenciaDriverState extends State<LicenciaDriver> {
                   ),
                 ),
                 Container(
-                  height: height / 1.5,
+                  height: height / 2.5,
                   width: width,
                   margin: EdgeInsets.all(20),
                   child: Center(
