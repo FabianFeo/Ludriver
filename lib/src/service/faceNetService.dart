@@ -26,22 +26,22 @@ class FaceNetService {
   List _predictedData;
   List get predictedData => this._predictedData;
 
-  //  saved users data
+  //  saved users data  
   dynamic data = {};
 
   Future loadModel() async {
     try {
-      GpuDelegateV2 gpuDelegateV2 = GpuDelegateV2(
-          options: GpuDelegateOptionsV2(
-              false,
-              TfLiteGpuInferenceUsage.fastSingleAnswer,
-              TfLiteGpuInferencePriority.minLatency,
-              TfLiteGpuInferencePriority.auto,
-              TfLiteGpuInferencePriority.auto));
+      // GpuDelegateV2 gpuDelegateV2 = GpuDelegateV2(
+      //     options: GpuDelegateOptionsV2(
+      //         false,
+      //         TfLiteGpuInferenceUsage.fastSingleAnswer,
+      //         TfLiteGpuInferencePriority.minLatency,
+      //         TfLiteGpuInferencePriority.auto,
+      //         TfLiteGpuInferencePriority.auto));
 
-      var interpreterOptions = InterpreterOptions()..addDelegate(gpuDelegateV2);
+      // var interpreterOptions = InterpreterOptions()..addDelegate(gpuDelegateV2);
       this._interpreter = await Interpreter.fromAsset('mobilefacenet.tflite',
-          options: interpreterOptions);
+         );
       print('model loaded successfully');
     } catch (e) {
       print('Failed to load model.');
