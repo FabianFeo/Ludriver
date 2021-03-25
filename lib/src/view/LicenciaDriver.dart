@@ -164,6 +164,37 @@ class _LicenciaDriverState extends State<LicenciaDriver> {
                     ),
                   ),
                 ),
+                BouncingWidget(
+                    duration: Duration(milliseconds: 100),
+                    scaleFactor: 1.5,
+                    onPressed: () {
+                      MaterialPageRoute(
+                          builder: (context) => ScannerRostro(
+                                cameraDescription: cameras.firstWhere(
+                                  (CameraDescription camera) =>
+                                      camera.lensDirection ==
+                                      CameraLensDirection.front,
+                                ),
+                              ));
+                    },
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      color: Color.fromRGBO(101, 79, 168, 1),
+                      child: Container(
+                        width: width / 2,
+                        height: height / 20,
+                        child: Text(
+                          "Verificar",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30),
+                        ),
+                      ),
+                    )),
               ],
             ),
           ),
