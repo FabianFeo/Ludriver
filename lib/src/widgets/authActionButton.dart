@@ -27,7 +27,18 @@ class _AuthActionButtonState extends State<AuthActionButton> {
   User predictedUser;
 
   Future saveCara(context) async {
-  
+    /// gets predicted data from facenet service (user face detected)
+    List predictedData = _faceNetService.predictedData;
+
+    /// creates a new user in the 'database'
+    await _dataBaseService.saveData(predictedData);
+    User user = User();
+    user.facePatern = predictedData;
+
+    /// resets the face stored in the face net sevice
+    this._faceNetService.setPredictedData(null);
+    //  Navigator.push(
+    //    context, MaterialPageRoute(builder: (BuildContext context) => Index()));
   }
 
   @override
