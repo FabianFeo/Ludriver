@@ -35,13 +35,15 @@ class _LicenciaConduccionState extends State<LicenciaConduccion> {
 
   Widget imagen() {
     return Center(
-      child: Container(
+      child: SingleChildScrollView(
+        child: Container(
         height: height / 1.2,
         width: width,
         child: Column(
           children: <Widget>[
             Text(
               'Licencia de conducir cara posterior.',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: Color.fromRGBO(101, 79, 168, 1),
                 fontWeight: FontWeight.w400,
@@ -108,7 +110,7 @@ class _LicenciaConduccionState extends State<LicenciaConduccion> {
             ),
           ],
         ),
-      ),
+      )),
     );
   }
 
