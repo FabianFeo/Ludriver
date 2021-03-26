@@ -128,7 +128,7 @@ class _MapaPageState extends State<MapaPage> {
                                                   Container(
                                                     child: Text(
                                                       snapshot2.data
-                                                              .data()
+                                                              .data() ['']
                                                               .toString() +
                                                           'Servicio',
                                                       style: TextStyle(
