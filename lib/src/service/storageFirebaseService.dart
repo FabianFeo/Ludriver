@@ -9,15 +9,15 @@ class StorageFirebaseService {
 
   Future<void> uplodaImage(File file) async {
     var storageReference = FirebaseStorage.instance
-        .ref('users/${_user.userUuid}/')
+        .ref('drivers/${_user.userUuid}/')
         .child('profileImage');
     await storageReference.putFile(file).then((task) async {
       var lista = await task.storage
-          .ref('users/${_user.userUuid}/')
+          .ref('drivers/${_user.userUuid}/')
           .child('profileImage')
           .getDownloadURL();
       await FirebaseFirestore.instance
-          .collection('users')
+          .collection('drivers')
           .doc(_user.userUuid)
           .update({'profileImage': lista});
     });
@@ -27,11 +27,11 @@ class StorageFirebaseService {
 
   Future<void> uplodaLiceseFrontal(File file) async {
     var storageReference = FirebaseStorage.instance
-        .ref('users/${_user.userUuid}/licencia')
+        .ref('drivers/${_user.userUuid}/licencia')
         .child('frontal');
     await storageReference.putFile(file).then((task) async {
       var lista = await task.storage
-          .ref('users/${_user.userUuid}/licencia')
+          .ref('drivers/${_user.userUuid}/licencia')
           .child('frontal')
           .getDownloadURL();
       await FirebaseFirestore.instance
@@ -43,17 +43,19 @@ class StorageFirebaseService {
 
   Future<void> uplodaLiceseTrasera(File file) async {
     var storageReference = FirebaseStorage.instance
-        .ref('users/${_user.userUuid}/licencia')
+        .ref('drivers/${_user.userUuid}/licencia')
         .child('trasera');
     await storageReference.putFile(file).then((task) async {
-      var lista = await task.storage
-          .ref('users/${_user.userUuid}/licencia')
+      await task.storage
+          .ref('drivers/${_user.userUuid}/licencia')
           .child('trasera')
-          .getDownloadURL();
-      await FirebaseFirestore.instance
-          .collection('drivers')
-          .doc(_user.userUuid)
-          .update({'licenciaTrasera': lista});
+          .getDownloadURL()
+          .then((value) async => {
+                await FirebaseFirestore.instance
+                    .collection('drivers')
+                    .doc(_user.userUuid)
+                    .update({'licenciaTrasera': value})
+              });
     });
   }
 
@@ -61,11 +63,11 @@ class StorageFirebaseService {
 
   Future<void> uplodaSoatFrontal(File file) async {
     var storageReference = FirebaseStorage.instance
-        .ref('users/${_user.userUuid}/SOAT')
+        .ref('drivers/${_user.userUuid}/SOAT')
         .child('frontal');
     await storageReference.putFile(file).then((task) async {
       var lista = await task.storage
-          .ref('users/${_user.userUuid}/SOAT')
+          .ref('drivers/${_user.userUuid}/SOAT')
           .child('frontal')
           .getDownloadURL();
       await FirebaseFirestore.instance
@@ -77,11 +79,11 @@ class StorageFirebaseService {
 
   Future<void> uplodaSoatTrasera(File file) async {
     var storageReference = FirebaseStorage.instance
-        .ref('users/${_user.userUuid}/SOAT')
+        .ref('drivers/${_user.userUuid}/SOAT')
         .child('trasera');
     await storageReference.putFile(file).then((task) async {
       var lista = await task.storage
-          .ref('users/${_user.userUuid}/SOAT')
+          .ref('drivers/${_user.userUuid}/SOAT')
           .child('trasera')
           .getDownloadURL();
       await FirebaseFirestore.instance
@@ -94,44 +96,44 @@ class StorageFirebaseService {
 //tarjeta de propiedad
   Future<void> uplodaTarjetaPropiedadFrontal(File file) async {
     var storageReference = FirebaseStorage.instance
-        .ref('users/${_user.userUuid}/TarjetaPropiedad')
+        .ref('drivers/${_user.userUuid}/TarjetaPropiedad')
         .child('frontal');
     await storageReference.putFile(file).then((task) async {
       var lista = await task.storage
-          .ref('users/${_user.userUuid}/TarjetaPropiedad')
+          .ref('drivers/${_user.userUuid}/TarjetaPropiedad')
           .child('frontal')
           .getDownloadURL();
       await FirebaseFirestore.instance
           .collection('drivers')
           .doc(_user.userUuid)
-          .update({'TarjetaPRopiedadFrontal': lista});
+          .update({'tarjetaPRopiedadFrontal': lista});
     });
   }
 
   Future<void> uplodaTarjetaPropiedadTrasera(File file) async {
     var storageReference = FirebaseStorage.instance
-        .ref('users/${_user.userUuid}/TarjetaPropiedad')
+        .ref('drivers/${_user.userUuid}/TarjetaPropiedad')
         .child('trasera');
     await storageReference.putFile(file).then((task) async {
       var lista = await task.storage
-          .ref('users/${_user.userUuid}/TarjetaPropiedad')
+          .ref('drivers/${_user.userUuid}/TarjetaPropiedad')
           .child('trasera')
           .getDownloadURL();
       await FirebaseFirestore.instance
           .collection('drivers')
           .doc(_user.userUuid)
-          .update({'TarjetaPRopiedadTrasera': lista});
+          .update({'tarjetaPRopiedadTrasera': lista});
     });
   }
 
   //revision tecnicomecanica
   Future<void> uplodaTecnicoMecanicaFrontal(File file) async {
     var storageReference = FirebaseStorage.instance
-        .ref('users/${_user.userUuid}/revisionTecnicoMecanica')
+        .ref('drivers/${_user.userUuid}/revisionTecnicoMecanica')
         .child('frontal');
     await storageReference.putFile(file).then((task) async {
       var lista = await task.storage
-          .ref('users/${_user.userUuid}/revisionTecnicoMecanica')
+          .ref('drivers/${_user.userUuid}/revisionTecnicoMecanica')
           .child('frontal')
           .getDownloadURL();
       await FirebaseFirestore.instance
@@ -143,11 +145,11 @@ class StorageFirebaseService {
 
   Future<void> uplodaTecnicoMecanicaTrasera(File file) async {
     var storageReference = FirebaseStorage.instance
-        .ref('users/${_user.userUuid}/revisionTecnicoMecanica')
+        .ref('drivers/${_user.userUuid}/revisionTecnicoMecanica')
         .child('trasera');
     await storageReference.putFile(file).then((task) async {
       var lista = await task.storage
-          .ref('users/${_user.userUuid}/revisionTecnicoMecanica')
+          .ref('drivers/${_user.userUuid}/revisionTecnicoMecanica')
           .child('trasera')
           .getDownloadURL();
       await FirebaseFirestore.instance

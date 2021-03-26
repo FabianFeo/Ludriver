@@ -11,6 +11,14 @@ class User {
   String documentoType;
   String expeditionDate;
   List facePatern;
+  String licenciaFrontal;
+  String licenciaTrasera;
+  String soatFrontal;
+  String soatTasera;
+  String tarjetaPRopiedadFrontal;
+  String tarjetaPRopiedadTrasera;
+  String revisionTecnicoMecanicaFrontal;
+  String revisionTecnicoMecanicaTrasera;
 
   User._internal();
   factory User() {

@@ -67,6 +67,14 @@
           }
         },
         {
+          "client_id": "421256406299-vq30a3uvoh84gktjkmisnbnpg12h7g8t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.luconductora",
+            "certificate_hash": "a7681894d186c25600aa1232cad62dd52499a112"
+          }
+        },
+        {
           "client_id": "421256406299-4jedtui5aoo7c8vs9p7uaf9s6glk3lj7.apps.googleusercontent.com",
           "client_type": 3
         }
