@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:luconductora/src/model/Driver.model.dart';
 import 'package:luconductora/src/view/Mapapage.dart';
+import 'package:luconductora/src/view/Perfil.dart';
 
 class Index extends StatefulWidget {
   Index({Key key}) : super(key: key);
@@ -10,7 +11,7 @@ class Index extends StatefulWidget {
   _IndexState createState() => _IndexState();
 }
 
-class _IndexState extends State<Index> {  
+class _IndexState extends State<Index> {
   User _user = User();
   // ignore: unused_field
   int _page = 1;
@@ -52,8 +53,10 @@ class _IndexState extends State<Index> {
           index: 1,
           height: 50.0,
           items: <Widget>[
-            Image(image: AssetImage('assets/Logo/Blog_icono.png'),
-            height: 30,),
+            Image(
+              image: AssetImage('assets/Logo/Blog_icono.png'),
+              height: 30,
+            ),
             Icon(Icons.directions_car_rounded,
                 size: 30, color: Color.fromRGBO(102, 51, 204, 1)),
             Icon(Icons.warning_rounded,
@@ -83,8 +86,7 @@ class _IndexState extends State<Index> {
           },
           letIndexChange: (index) => true,
         ),
-        body: Container(
-            color: Colors.white, child: pageCurrent),
+        body: Container(color: Colors.white, child: pageCurrent),
         drawer: Drawer(
           // Add a ListView to the drawer. This ensures the user can scroll
           // through the options in the drawer if there isn't enough vertical
@@ -110,10 +112,10 @@ class _IndexState extends State<Index> {
                                 child: Container(
                                   margin: EdgeInsets.only(top: height / 50),
                                   child: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: height / 28,
-                                    backgroundImage: AssetImage('assets/Logo/Conductora.png')                                        
-                                  ),
+                                      backgroundColor: Colors.white,
+                                      radius: height / 28,
+                                      backgroundImage: AssetImage(
+                                          'assets/Logo/Conductora.png')),
                                 ),
                               ),
                               Container(
@@ -140,6 +142,10 @@ class _IndexState extends State<Index> {
                                     ),
                                   ),
                                   onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Perfil()));
                                   },
                                 ),
                               )
@@ -176,8 +182,7 @@ class _IndexState extends State<Index> {
                                   style: TextStyle(
                                       color: Color.fromRGBO(101, 79, 168, 1)),
                                 ),
-                                onTap: () {
-                                },
+                                onTap: () {},
                               ),
                             ),
                           ],
@@ -202,8 +207,7 @@ class _IndexState extends State<Index> {
                                   style: TextStyle(
                                       color: Color.fromRGBO(101, 79, 168, 1)),
                                 ),
-                               onTap: () {
-                                },
+                                onTap: () {},
                               ),
                             ),
                           ],
@@ -228,8 +232,7 @@ class _IndexState extends State<Index> {
                                   style: TextStyle(
                                       color: Color.fromRGBO(101, 79, 168, 1)),
                                 ),
-                                onTap: () {
-                                },
+                                onTap: () {},
                               ),
                             ),
                           ],
@@ -254,8 +257,7 @@ class _IndexState extends State<Index> {
                                   style: TextStyle(
                                       color: Color.fromRGBO(101, 79, 168, 1)),
                                 ),
-                                onTap: () {
-                                },
+                                onTap: () {},
                               ),
                             ),
                           ],
@@ -280,8 +282,7 @@ class _IndexState extends State<Index> {
                                   style: TextStyle(
                                       color: Color.fromRGBO(101, 79, 168, 1)),
                                 ),
-                                onTap: () {
-                                },
+                                onTap: () {},
                               ),
                             ),
                           ],
@@ -306,8 +307,7 @@ class _IndexState extends State<Index> {
                                   style: TextStyle(
                                       color: Color.fromRGBO(101, 79, 168, 1)),
                                 ),
-                                onTap: () {
-                                },
+                                onTap: () {},
                               ),
                             ),
                           ],
@@ -367,8 +367,7 @@ class _IndexState extends State<Index> {
                               color: Color.fromRGBO(40, 1, 102, 0.5),
                             ),
                           ),
-                          onTap: () {
-                          },
+                          onTap: () {},
                         ),
                       ),
                     ],
