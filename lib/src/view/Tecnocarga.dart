@@ -128,7 +128,7 @@ class _TecnoMcargaState extends State<TecnoMcarga> {
     StorageFirebaseService storageFirebaseService = StorageFirebaseService();
     storageFirebaseService.uplodaTarjetaPropiedadTrasera(File(archivo.path));
     setState(() {
-      tecnoMImage = archivo;
+      tecnoMImage2 = archivo;
     });
   }
 

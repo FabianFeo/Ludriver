@@ -128,7 +128,7 @@ class _TarjetaPcargaState extends State<TarjetaPcarga> {
     StorageFirebaseService storageFirebaseService = StorageFirebaseService();
     storageFirebaseService.uplodaTarjetaPropiedadFrontal(File(archivo.path));
     setState(() {
-      tarjetaPImage = archivo;
+      tarjetaPImage2 = archivo;
     });
   }
 

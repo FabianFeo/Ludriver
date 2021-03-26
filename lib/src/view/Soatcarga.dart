@@ -128,7 +128,7 @@ class _SoatCargaState extends State<SoatCarga> {
     StorageFirebaseService storageFirebaseService = StorageFirebaseService();
     storageFirebaseService.uplodaSoatTrasera(File(archivo.path));
     setState(() {
-      soatImage = archivo;
+      soatImage2 = archivo;
     });
   }
 
