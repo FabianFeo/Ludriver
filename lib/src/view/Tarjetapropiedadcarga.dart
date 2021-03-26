@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:luconductora/src/service/storageFirebaseService.dart';
 
 class TarjetaPcarga extends StatefulWidget {
   TarjetaPcarga({Key key}) : super(key: key);
@@ -115,6 +116,8 @@ class _TarjetaPcargaState extends State<TarjetaPcarga> {
 
   void tomarFoto(ImageSource source) async {
     final archivo = await picker.getImage(source: source);
+    StorageFirebaseService storageFirebaseService = StorageFirebaseService();
+    storageFirebaseService.uplodaTarjetaPropiedadFrontal(File(archivo.path));
     setState(() {
       tarjetaPImage = archivo;
     });
@@ -122,6 +125,8 @@ class _TarjetaPcargaState extends State<TarjetaPcarga> {
 
   void tomarFoto2(ImageSource source) async {
     final archivo = await picker.getImage(source: source);
+    StorageFirebaseService storageFirebaseService = StorageFirebaseService();
+    storageFirebaseService.uplodaTarjetaPropiedadFrontal(File(archivo.path));
     setState(() {
       tarjetaPImage = archivo;
     });

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:luconductora/src/service/storageFirebaseService.dart';
 
 class SoatCarga extends StatefulWidget {
   SoatCarga({Key key}) : super(key: key);
@@ -115,6 +116,8 @@ class _SoatCargaState extends State<SoatCarga> {
 
   void tomarFoto(ImageSource source) async {
     final archivo = await picker.getImage(source: source);
+    StorageFirebaseService storageFirebaseService = StorageFirebaseService();
+    storageFirebaseService.uplodaSoatFrontal(File(archivo.path));
     setState(() {
       soatImage = archivo;
     });
@@ -122,6 +125,8 @@ class _SoatCargaState extends State<SoatCarga> {
 
   void tomarFoto2(ImageSource source) async {
     final archivo = await picker.getImage(source: source);
+    StorageFirebaseService storageFirebaseService = StorageFirebaseService();
+    storageFirebaseService.uplodaSoatTrasera(File(archivo.path));
     setState(() {
       soatImage = archivo;
     });

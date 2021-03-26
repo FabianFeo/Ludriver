@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:luconductora/src/service/storageFirebaseService.dart';
 
 class LicenciaConduccion extends StatefulWidget {
   LicenciaConduccion({Key key}) : super(key: key);
@@ -12,6 +14,7 @@ class LicenciaConduccion extends StatefulWidget {
 class _LicenciaConduccionState extends State<LicenciaConduccion> {
   PickedFile licenceImage;
   PickedFile licenceImage2;
+  var storage = FirebaseStorage.instance;
   final ImagePicker picker = ImagePicker();
   double height = 0;
   double width = 0;
@@ -36,7 +39,7 @@ class _LicenciaConduccionState extends State<LicenciaConduccion> {
   Widget imagen() {
     return Center(
       child: SingleChildScrollView(
-        child: Container(
+          child: Container(
         height: height / 1.2,
         width: width,
         child: Column(
@@ -116,6 +119,8 @@ class _LicenciaConduccionState extends State<LicenciaConduccion> {
 
   void tomarFoto(ImageSource source) async {
     final archivo = await picker.getImage(source: source);
+    StorageFirebaseService storageFirebaseService = StorageFirebaseService();
+    storageFirebaseService.uplodaLiceseFrontal(File(archivo.path));
     setState(() {
       licenceImage = archivo;
     });
@@ -123,6 +128,8 @@ class _LicenciaConduccionState extends State<LicenciaConduccion> {
 
   void tomarFoto2(ImageSource source) async {
     final archivo = await picker.getImage(source: source);
+    StorageFirebaseService storageFirebaseService = StorageFirebaseService();
+    storageFirebaseService.uplodaLiceseTrasera(File(archivo.path));
     setState(() {
       licenceImage2 = archivo;
     });
