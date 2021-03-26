@@ -46,7 +46,7 @@ class _MapaPageState extends State<MapaPage> {
                         child: GoogleMap(
                           // ignore: non_constant_identifier_names
                           onTap: (LatLng) {},
-                          myLocationButtonEnabled: false,
+                          myLocationButtonEnabled: true,
                           buildingsEnabled: false,
                           zoomControlsEnabled: false,
 
