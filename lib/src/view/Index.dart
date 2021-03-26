@@ -1,8 +1,16 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:luconductora/src/model/Driver.model.dart';
+import 'package:luconductora/src/view/Ayuda.dart';
+import 'package:luconductora/src/view/Carga.dart';
+import 'package:luconductora/src/view/Configuracion.dart';
+import 'package:luconductora/src/view/Contactoconfianza.dart';
+import 'package:luconductora/src/view/Historialviajes.dart';
 import 'package:luconductora/src/view/Mapapage.dart';
+import 'package:luconductora/src/view/Mensajes.dart';
 import 'package:luconductora/src/view/Perfil.dart';
+import 'package:luconductora/src/service/AuthService.dart';
+import 'package:luconductora/src/view/payment.dart';
 
 class Index extends StatefulWidget {
   Index({Key key}) : super(key: key);
@@ -182,7 +190,13 @@ class _IndexState extends State<Index> {
                                   style: TextStyle(
                                       color: Color.fromRGBO(101, 79, 168, 1)),
                                 ),
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ContactoConfianza()));
+                                },
                               ),
                             ),
                           ],
@@ -207,7 +221,13 @@ class _IndexState extends State<Index> {
                                   style: TextStyle(
                                       color: Color.fromRGBO(101, 79, 168, 1)),
                                 ),
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              MensajesDriver()));
+                                },
                               ),
                             ),
                           ],
@@ -232,7 +252,13 @@ class _IndexState extends State<Index> {
                                   style: TextStyle(
                                       color: Color.fromRGBO(101, 79, 168, 1)),
                                 ),
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              HistorialViajes()));
+                                },
                               ),
                             ),
                           ],
@@ -257,7 +283,12 @@ class _IndexState extends State<Index> {
                                   style: TextStyle(
                                       color: Color.fromRGBO(101, 79, 168, 1)),
                                 ),
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Pagos()));
+                                },
                               ),
                             ),
                           ],
@@ -282,7 +313,12 @@ class _IndexState extends State<Index> {
                                   style: TextStyle(
                                       color: Color.fromRGBO(101, 79, 168, 1)),
                                 ),
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Config()));
+                                },
                               ),
                             ),
                           ],
@@ -307,7 +343,12 @@ class _IndexState extends State<Index> {
                                   style: TextStyle(
                                       color: Color.fromRGBO(101, 79, 168, 1)),
                                 ),
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Ayuda()));
+                                },
                               ),
                             ),
                           ],
@@ -321,22 +362,6 @@ class _IndexState extends State<Index> {
                               child: Icon(
                                 Icons.drive_eta,
                                 color: Color.fromRGBO(40, 1, 102, 1),
-                              ),
-                            ),
-                            Container(
-                              height: height / 14,
-                              width: width / 2,
-                              child: ListTile(
-                                title: Text('Volverme conductora',
-                                    style: TextStyle(
-                                      color: Color.fromRGBO(101, 79, 168, 1),
-                                    )),
-                                onTap: () {
-                                  // Update the state of the app
-                                  // ...
-                                  // Then close the drawer
-                                  Navigator.pop(context);
-                                },
                               ),
                             ),
                           ],
@@ -367,7 +392,18 @@ class _IndexState extends State<Index> {
                               color: Color.fromRGBO(40, 1, 102, 0.5),
                             ),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            DriverService authService = DriverService();
+                            authService.singOut().then((value) => {
+                                  Navigator.of(context).pop(),
+                                  Navigator.of(context).pop(),
+                                  Navigator.of(context).pop(),
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Carga())),
+                                });
+                          },
                         ),
                       ),
                     ],

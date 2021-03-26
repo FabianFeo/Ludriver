@@ -1,10 +1,8 @@
 import 'package:luconductora/src/model/Driver.model.dart';
-import 'package:luconductora/src/service/DriverCollectionService.dart';
 import 'package:luconductora/src/service/cameraService.dart';
 import 'package:luconductora/src/service/databaseService.dart';
 import 'package:luconductora/src/service/faceNetService.dart';
 import 'package:luconductora/src/service/mlVisionService.dart';
-import 'package:luconductora/src/view/DocumentosDriver.dart';
 import 'package:luconductora/src/widgets/authActionButton.dart';
 import 'package:luconductora/src/widgets/facePainter.dart';
 import 'package:camera/camera.dart';
