@@ -117,22 +117,41 @@ class _MapaPageState extends State<MapaPage> {
                                             snapshot2) {
                                       return snapshot2.hasData
                                           ? Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(15)
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(15)),
+                                                color: Color.fromRGBO(
+                                                    207, 197, 239, 1),
                                               ),
-                                              color: Color.fromRGBO(207, 197, 239, 1),
-                                            ),
                                               child: Column(
                                                 children: [
                                                   Container(
+                                                    child: Text(
+                                                      snapshot2.data
+                                                              .data()
+                                                              .toString() +
+                                                          'Servicio',
+                                                      style: TextStyle(
+                                                        color: Color.fromRGBO(
+                                                            102, 51, 204, 1),
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                    ),
                                                   ),
-                                                  Text(snapshot2.data
-                                                      .data()
-                                                      .toString()),
-                                                  Text(sitanciaFilter[index]
-                                                      .data()
-                                                      .toString())
+                                                  Container(
+                                                    child: Text(
+                                                      sitanciaFilter[index]
+                                                          .data()
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                        color: Color.fromRGBO(
+                                                            102, 51, 204, 1),
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
                                             )
