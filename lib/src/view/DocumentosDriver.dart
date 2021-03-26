@@ -2,6 +2,7 @@ import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:luconductora/src/model/Document.model.dart';
+import 'package:luconductora/src/view/CedulaCarga.dart';
 import 'package:luconductora/src/view/Licenciacarga.dart';
 import 'package:luconductora/src/view/Soatcarga.dart';
 import 'package:luconductora/src/view/Tarjetapropiedadcarga.dart';
@@ -9,11 +10,11 @@ import 'package:luconductora/src/view/Tecnocarga.dart';
 
 import 'ScannerCara.dart';
 
-class LicenciaDriver extends StatefulWidget {
-  LicenciaDriver({Key key}) : super(key: key);
+class DocumentosDriver extends StatefulWidget {
+  DocumentosDriver({Key key}) : super(key: key);
 
   @override
-  _LicenciaDriverState createState() => _LicenciaDriverState();
+  _DocumentosDriverState createState() => _DocumentosDriverState();
 }
 
 List<Documents> documentos = [
@@ -32,10 +33,14 @@ List<Documents> documentos = [
   Documents(
     'Revision Tecnicomecanica',
     'Revision del vehiculo',
+  ),
+  Documents(
+    'documento de identificacion',
+    'cedula de ciudadania o extrangeria',
   )
 ];
 
-class _LicenciaDriverState extends State<LicenciaDriver> {
+class _DocumentosDriverState extends State<DocumentosDriver> {
   double height = 0;
   double width = 0;
   List<CameraDescription> cameras;
@@ -146,6 +151,13 @@ class _LicenciaDriverState extends State<LicenciaDriver> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => TecnoMcarga()));
+                                  break;
+                                case 4:
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              CedulaDriver()));
                                   break;
                               }
                             });
