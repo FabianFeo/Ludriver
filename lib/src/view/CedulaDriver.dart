@@ -1,6 +1,6 @@
 import 'package:luconductora/src/model/Driver.model.dart';
 import 'package:luconductora/src/service/DriverCollectionService.dart';
-import 'package:luconductora/src/view/LicenciaDriver.dart';
+import 'package:luconductora/src/view/DocumentosDriver.dart';
 import 'package:beauty_textfield/beauty_textfield.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +75,7 @@ class _CedulaDriverState extends State<CedulaDriver> {
                       groupValue: selectedRadio,
                       activeColor: Color.fromRGBO(101, 79, 168, 1),
                       onChanged: (val) {
-                        user.documentoType="C.C";
+                        user.documentoType = "C.C";
                         print("Radio $val");
                         setSelectedRadio(val);
                       },
@@ -86,7 +86,7 @@ class _CedulaDriverState extends State<CedulaDriver> {
                       groupValue: selectedRadio,
                       activeColor: Color.fromRGBO(101, 79, 168, 1),
                       onChanged: (val) {
-                        user.documentoType="C.E";
+                        user.documentoType = "C.E";
                         print("Radio $val");
                         setSelectedRadio(val);
                       },
@@ -120,7 +120,7 @@ class _CedulaDriverState extends State<CedulaDriver> {
                     color: Colors.grey,
                   ),
                   onChanged: (text) {
-                    user.documento=text;
+                    user.documento = text;
                   },
                 ),
                 Card(
@@ -141,8 +141,7 @@ class _CedulaDriverState extends State<CedulaDriver> {
                               final DateFormat formatter =
                                   DateFormat('yyyy-MM-dd');
                               print(DateFormat);
-                              final String formatted =
-                                  formatter.format(picked);
+                              final String formatted = formatter.format(picked);
                               setState(() {
                                 user.expeditionDate = formatted;
                               });
@@ -174,7 +173,7 @@ class _CedulaDriverState extends State<CedulaDriver> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LicenciaDriver())),
+                                    builder: (context) => DocumentosDriver())),
                           });
                     },
                     child: Card(

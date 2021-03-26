@@ -30,14 +30,16 @@ class StorageFirebaseService {
         .ref('drivers/${_user.userUuid}/licencia')
         .child('frontal');
     await storageReference.putFile(file).then((task) async {
-      var lista = await task.storage
+      await task.storage
           .ref('drivers/${_user.userUuid}/licencia')
           .child('frontal')
-          .getDownloadURL();
-      await FirebaseFirestore.instance
-          .collection('drivers')
-          .doc(_user.userUuid)
-          .update({'licenciaFrontal': lista});
+          .getDownloadURL()
+          .then((value) async => {
+                await FirebaseFirestore.instance
+                    .collection('drivers')
+                    .doc(_user.userUuid)
+                    .update({'licenciaFrontal': value})
+              });
     });
   }
 
@@ -66,14 +68,16 @@ class StorageFirebaseService {
         .ref('drivers/${_user.userUuid}/SOAT')
         .child('frontal');
     await storageReference.putFile(file).then((task) async {
-      var lista = await task.storage
+      await task.storage
           .ref('drivers/${_user.userUuid}/SOAT')
           .child('frontal')
-          .getDownloadURL();
-      await FirebaseFirestore.instance
-          .collection('drivers')
-          .doc(_user.userUuid)
-          .update({'soatFrontal': lista});
+          .getDownloadURL()
+          .then((value) async => {
+                await FirebaseFirestore.instance
+                    .collection('drivers')
+                    .doc(_user.userUuid)
+                    .update({'soatFrontal': value})
+              });
     });
   }
 
@@ -85,11 +89,13 @@ class StorageFirebaseService {
       var lista = await task.storage
           .ref('drivers/${_user.userUuid}/SOAT')
           .child('trasera')
-          .getDownloadURL();
-      await FirebaseFirestore.instance
-          .collection('drivers')
-          .doc(_user.userUuid)
-          .update({'soatTasera': lista});
+          .getDownloadURL()
+          .then((value) async => {
+                await FirebaseFirestore.instance
+                    .collection('drivers')
+                    .doc(_user.userUuid)
+                    .update({'soatTasera': value})
+              });
     });
   }
 
@@ -99,14 +105,16 @@ class StorageFirebaseService {
         .ref('drivers/${_user.userUuid}/TarjetaPropiedad')
         .child('frontal');
     await storageReference.putFile(file).then((task) async {
-      var lista = await task.storage
+      await task.storage
           .ref('drivers/${_user.userUuid}/TarjetaPropiedad')
           .child('frontal')
-          .getDownloadURL();
-      await FirebaseFirestore.instance
-          .collection('drivers')
-          .doc(_user.userUuid)
-          .update({'tarjetaPRopiedadFrontal': lista});
+          .getDownloadURL()
+          .then((value) async => {
+                await FirebaseFirestore.instance
+                    .collection('drivers')
+                    .doc(_user.userUuid)
+                    .update({'tarjetaPRopiedadFrontal': value})
+              });
     });
   }
 
@@ -115,14 +123,16 @@ class StorageFirebaseService {
         .ref('drivers/${_user.userUuid}/TarjetaPropiedad')
         .child('trasera');
     await storageReference.putFile(file).then((task) async {
-      var lista = await task.storage
+      await task.storage
           .ref('drivers/${_user.userUuid}/TarjetaPropiedad')
           .child('trasera')
-          .getDownloadURL();
-      await FirebaseFirestore.instance
-          .collection('drivers')
-          .doc(_user.userUuid)
-          .update({'tarjetaPRopiedadTrasera': lista});
+          .getDownloadURL()
+          .then((value) async => {
+                await FirebaseFirestore.instance
+                    .collection('drivers')
+                    .doc(_user.userUuid)
+                    .update({'tarjetaPRopiedadTrasera': value})
+              });
     });
   }
 
@@ -132,14 +142,16 @@ class StorageFirebaseService {
         .ref('drivers/${_user.userUuid}/revisionTecnicoMecanica')
         .child('frontal');
     await storageReference.putFile(file).then((task) async {
-      var lista = await task.storage
+      await task.storage
           .ref('drivers/${_user.userUuid}/revisionTecnicoMecanica')
           .child('frontal')
-          .getDownloadURL();
-      await FirebaseFirestore.instance
-          .collection('drivers')
-          .doc(_user.userUuid)
-          .update({'revisionTecnicoMecanicaFrontal': lista});
+          .getDownloadURL()
+          .then((value) async => {
+                await FirebaseFirestore.instance
+                    .collection('drivers')
+                    .doc(_user.userUuid)
+                    .update({'revisionTecnicoMecanicaFrontal': value})
+              });
     });
   }
 
@@ -148,14 +160,53 @@ class StorageFirebaseService {
         .ref('drivers/${_user.userUuid}/revisionTecnicoMecanica')
         .child('trasera');
     await storageReference.putFile(file).then((task) async {
-      var lista = await task.storage
+      await task.storage
           .ref('drivers/${_user.userUuid}/revisionTecnicoMecanica')
           .child('trasera')
-          .getDownloadURL();
-      await FirebaseFirestore.instance
-          .collection('drivers')
-          .doc(_user.userUuid)
-          .update({'revisionTecnicoMecanicaTrasera': lista});
+          .getDownloadURL()
+          .then((value) async => {
+                await FirebaseFirestore.instance
+                    .collection('drivers')
+                    .doc(_user.userUuid)
+                    .update({'revisionTecnicoMecanicaTrasera': value})
+              });
+    });
+  }
+
+  //cedula driver
+  Future<void> uplodaCedulaFrontal(File file) async {
+    var storageReference = FirebaseStorage.instance
+        .ref('drivers/${_user.userUuid}/CedulaDriver')
+        .child('frontal');
+    await storageReference.putFile(file).then((task) async {
+      await task.storage
+          .ref('drivers/${_user.userUuid}/CedulaDriver')
+          .child('frontal')
+          .getDownloadURL()
+          .then((value) async => {
+                await FirebaseFirestore.instance
+                    .collection('drivers')
+                    .doc(_user.userUuid)
+                    .update({'CedulaFrontal': value})
+              });
+    });
+  }
+
+  Future<void> uplodaCedulaTrasera(File file) async {
+    var storageReference = FirebaseStorage.instance
+        .ref('drivers/${_user.userUuid}/CedulaDriver')
+        .child('trasera');
+    await storageReference.putFile(file).then((task) async {
+      await task.storage
+          .ref('drivers/${_user.userUuid}/CedulaDriver')
+          .child('trasera')
+          .getDownloadURL()
+          .then((value) async => {
+                await FirebaseFirestore.instance
+                    .collection('drivers')
+                    .doc(_user.userUuid)
+                    .update({'CedulaTrasera': value})
+              });
     });
   }
 }
