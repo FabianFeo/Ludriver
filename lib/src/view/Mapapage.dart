@@ -117,8 +117,16 @@ class _MapaPageState extends State<MapaPage> {
                                             snapshot2) {
                                       return snapshot2.hasData
                                           ? Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(15)
+                                              ),
+                                              color: Color.fromRGBO(207, 197, 239, 1),
+                                            ),
                                               child: Column(
                                                 children: [
+                                                  Container(
+                                                  ),
                                                   Text(snapshot2.data
                                                       .data()
                                                       .toString()),
