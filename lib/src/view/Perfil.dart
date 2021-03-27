@@ -174,16 +174,6 @@ class _PerfilState extends State<Perfil> {
                                   Container(
                                     margin: EdgeInsets.only(top: height / 8),
                                     child: Text(
-                                      'Mis dispositivos',
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: height / 8),
-                                    child: Text(
                                       'Eliminar mi cuenta',
                                       textAlign: TextAlign.start,
                                       style: TextStyle(

@@ -1,5 +1,5 @@
 import 'package:luconductora/src/view/Historialviajes.dart';
-import 'package:luconductora/src/view/Olvide.dart';
+import 'package:luconductora/src/view/ActualizarDocumentos.dart';
 import 'package:luconductora/src/view/Seguridad.dart';
 import 'package:luconductora/src/view/Sugerencias.dart';
 import 'package:luconductora/src/view/Tarifas.dart';
@@ -133,7 +133,7 @@ class _AyudaState extends State<Ayuda> {
                           margin: EdgeInsets.only(right: width / 15),
                           child: GestureDetector(
                             child: Text(
-                              'Olvidé un objeto en el vehículo',
+                              'Debo actualizar mis documentos de trafico.',
                               style: TextStyle(
                                   color: Color.fromRGBO(101, 79, 168, 1),
                                   fontWeight: FontWeight.w500),
@@ -142,7 +142,8 @@ class _AyudaState extends State<Ayuda> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Olvide()));
+                                      builder: (context) =>
+                                          ActualizarDocumentos()));
                             },
                           ),
                         ),
