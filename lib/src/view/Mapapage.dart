@@ -17,6 +17,8 @@ class MapaPage extends StatefulWidget {
 }
 
 class _MapaPageState extends State<MapaPage> {
+  double height = 0;
+  double width = 0;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   lo.Location _location = lo.Location();
   Timer timer;
@@ -28,6 +30,8 @@ class _MapaPageState extends State<MapaPage> {
   GoogleMapController _controller;
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     CardController controller;
     return FutureBuilder(
       future: _location.getLocation(),
@@ -72,7 +76,7 @@ class _MapaPageState extends State<MapaPage> {
                                               startCoordinates.longitude,
                                               element.data()['latInicio'],
                                               element.data()['lanInicio']) /
-                                          1000 >=
+                                          1000 <=
                                       kmFilter;
                                 }).toList();
 
@@ -100,7 +104,7 @@ class _MapaPageState extends State<MapaPage> {
                                   maxWidth:
                                       MediaQuery.of(context).size.width * 0.9,
                                   maxHeight:
-                                      MediaQuery.of(context).size.width * 0.9,
+                                      MediaQuery.of(context).size.width * 1.2,
                                   minWidth:
                                       MediaQuery.of(context).size.width * 0.8,
                                   minHeight:
@@ -126,29 +130,153 @@ class _MapaPageState extends State<MapaPage> {
                                               child: Column(
                                                 children: [
                                                   Container(
+                                                    margin: EdgeInsets.only(
+                                                        top: height / 50),
                                                     child: Text(
-                                                      snapshot2.data
-                                                              .data() ['']
-                                                              .toString() +
-                                                          'Servicio',
+                                                      'Viaje disponible',
                                                       style: TextStyle(
-                                                        color: Color.fromRGBO(
-                                                            102, 51, 204, 1),
-                                                        fontWeight:
-                                                            FontWeight.w500,
+                                                          color: Color.fromRGBO(
+                                                              102, 51, 204, 1),
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize:
+                                                              height / 35),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                      margin: EdgeInsets.only(
+                                                          top: height / 50),
+                                                      height: height / 7,
+                                                      child: CircleAvatar(
+                                                        radius: 60,
+                                                        backgroundImage: snapshot2
+                                                                        .data
+                                                                        .data()[
+                                                                    'profileImage'] ==
+                                                                null
+                                                            ? AssetImage(
+                                                                'Conductora.png')
+                                                            : NetworkImage(snapshot2
+                                                                    .data
+                                                                    .data()[
+                                                                'profileImage']),
+                                                      )),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                            top: height / 50),
+                                                        child: Text(
+                                                          snapshot2.data
+                                                                  .data()[
+                                                                      'firstName']
+                                                                  .toString() +
+                                                              '',
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    102,
+                                                                    51,
+                                                                    204,
+                                                                    1),
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                            top: height / 50),
+                                                        child: Text(
+                                                          snapshot2.data
+                                                                  .data()[
+                                                                      'lastname']
+                                                                  .toString() +
+                                                              '',
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    102,
+                                                                    51,
+                                                                    204,
+                                                                    1),
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                            top: height / 50),
+                                                    child: Text(
+                                                      'Punto de encuentro',
+                                                      style: TextStyle(
+                                                          color: Color.fromRGBO(
+                                                              102, 51, 204, 1),
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize:
+                                                              height / 50),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                            top: height / 50),
+                                                    child: Container(
+                                                      height: height / 15,
+                                                      width: width / 1.5,
+                                                      child: Text(
+                                                        sitanciaFilter[index]
+                                                            .data()[
+                                                                'direccionInicio']
+                                                            .toString(),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                          color: Color.fromRGBO(
+                                                              102, 51, 204, 1),
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
                                                   Container(
                                                     child: Text(
-                                                      sitanciaFilter[index]
-                                                          .data()
-                                                          .toString(),
+                                                      'Punto de destino',
                                                       style: TextStyle(
-                                                        color: Color.fromRGBO(
-                                                            102, 51, 204, 1),
-                                                        fontWeight:
-                                                            FontWeight.w500,
+                                                          color: Color.fromRGBO(
+                                                              102, 51, 204, 1),
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize:
+                                                              height / 50),
+                                                    ),
+                                                  ),
+
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                            top: height / 50),
+                                                    child: Container(
+                                                      width: width / 1.5,
+                                                      child: Text(
+                                                        sitanciaFilter[index]
+                                                            .data()[
+                                                                'direccionDestino']
+                                                            .toString(),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                          color: Color.fromRGBO(
+                                                              102, 51, 204, 1),
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
