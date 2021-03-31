@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       _mlVisionService.initialize();
     });
     return MaterialApp(
-      title: 'Lü conductoras',
+      title: 'Lü conductora',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
