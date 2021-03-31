@@ -13,6 +13,8 @@ import 'package:luconductora/src/view/Perfil.dart';
 import 'package:luconductora/src/service/AuthService.dart';
 import 'package:luconductora/src/view/payment.dart';
 
+import 'BotonPanico.dart';
+
 class Index extends StatefulWidget {
   Index({Key key}) : super(key: key);
 
@@ -87,7 +89,7 @@ class _IndexState extends State<Index> {
 
                   break;
                 case 2:
-                  pageCurrent = Container();
+                  pageCurrent = BotonPanico();
                   break;
               }
               _page = index;
