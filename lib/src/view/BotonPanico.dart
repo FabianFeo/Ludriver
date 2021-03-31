@@ -1,5 +1,6 @@
 import 'package:luconductora/src/view/LuAlarmada.dart';
 import 'package:luconductora/src/view/LuPreocupada.dart';
+import 'package:luconductora/src/view/LuAsustada.dart';
 import 'package:flutter/material.dart';
 
 class BotonPanico extends StatefulWidget {
@@ -135,7 +136,12 @@ class _BotonPanicoState extends State<BotonPanico> {
                                   ),
                                 ),
                               ),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LuAsustada()));
+                              },
                             ),
                             Container(
                               child: Text(

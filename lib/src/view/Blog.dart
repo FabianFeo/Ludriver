@@ -110,7 +110,7 @@ class _BlogState extends State<Blogs> {
                         child: Row(
                           children: [
                             Container(
-                              width: width / 1.179,
+                              width: width / 1.229,
                               child: Center(
                                 child: Text(
                                   'Publicidad',
