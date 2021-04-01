@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:luconductora/src/model/Driver.model.dart';
+import 'package:luconductora/src/model/driver.model.dart';
 import 'package:luconductora/src/service/storageFirebaseService.dart';
-import 'package:luconductora/src/service/DriverCollectionService.dart';
+import 'package:luconductora/src/service/driverCollectionService.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' show join;

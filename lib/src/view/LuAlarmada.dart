@@ -1,4 +1,4 @@
-import 'package:luconductora/src/view/Contactoconfianza.dart';
+import 'package:luconductora/src/view/contactoconfianza.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
 

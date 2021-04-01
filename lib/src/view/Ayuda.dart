@@ -1,8 +1,8 @@
-import 'package:luconductora/src/view/Historialviajes.dart';
-import 'package:luconductora/src/view/ActualizarDocumentos.dart';
-import 'package:luconductora/src/view/Seguridad.dart';
-import 'package:luconductora/src/view/Sugerencias.dart';
-import 'package:luconductora/src/view/Tarifas.dart';
+import 'package:luconductora/src/view/historialviajes.dart';
+import 'package:luconductora/src/view/actualizarDocumentos.dart';
+import 'package:luconductora/src/view/seguridad.dart';
+import 'package:luconductora/src/view/sugerencias.dart';
+import 'package:luconductora/src/view/tarifas.dart';
 import 'package:flutter/material.dart';
 
 class Ayuda extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:luconductora/src/model/Driver.model.dart';
+import 'package:luconductora/src/model/driver.model.dart';
 import 'package:luconductora/src/service/cameraService.dart';
 import 'package:luconductora/src/service/databaseService.dart';
 import 'package:luconductora/src/service/faceNetService.dart';

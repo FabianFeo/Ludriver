@@ -1,19 +1,19 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:luconductora/src/model/Driver.model.dart';
-import 'package:luconductora/src/view/Ayuda.dart';
-import 'package:luconductora/src/view/Blog.dart';
-import 'package:luconductora/src/view/Carga.dart';
-import 'package:luconductora/src/view/Configuracion.dart';
-import 'package:luconductora/src/view/Contactoconfianza.dart';
-import 'package:luconductora/src/view/Historialviajes.dart';
-import 'package:luconductora/src/view/Mapapage.dart';
-import 'package:luconductora/src/view/Mensajes.dart';
-import 'package:luconductora/src/view/Perfil.dart';
-import 'package:luconductora/src/service/AuthService.dart';
+import 'package:luconductora/src/model/driver.model.dart';
+import 'package:luconductora/src/view/ayuda.dart';
+import 'package:luconductora/src/view/blog.dart';
+import 'package:luconductora/src/view/carga.dart';
+import 'package:luconductora/src/view/configuracion.dart';
+import 'package:luconductora/src/view/contactoconfianza.dart';
+import 'package:luconductora/src/view/historialviajes.dart';
+import 'package:luconductora/src/view/mapapage.dart';
+import 'package:luconductora/src/view/mensajes.dart';
+import 'package:luconductora/src/view/perfil.dart';
+import 'package:luconductora/src/service/authService.dart';
 import 'package:luconductora/src/view/payment.dart';
 
-import 'BotonPanico.dart';
+import 'botonPanico.dart';
 
 class Index extends StatefulWidget {
   Index({Key key}) : super(key: key);
@@ -352,19 +352,6 @@ class _IndexState extends State<Index> {
                                       MaterialPageRoute(
                                           builder: (context) => Ayuda()));
                                 },
-                              ),
-                            ),
-                          ],
-                        ),
-                        Divider(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              height: height / 20,
-                              child: Icon(
-                                Icons.drive_eta,
-                                color: Color.fromRGBO(40, 1, 102, 1),
                               ),
                             ),
                           ],

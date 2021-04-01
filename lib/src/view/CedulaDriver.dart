@@ -1,6 +1,6 @@
-import 'package:luconductora/src/model/Driver.model.dart';
-import 'package:luconductora/src/service/DriverCollectionService.dart';
-import 'package:luconductora/src/view/DocumentosDriver.dart';
+import 'package:luconductora/src/model/driver.model.dart';
+import 'package:luconductora/src/service/driverCollectionService.dart';
+import 'package:luconductora/src/view/documentosDriver.dart';
 import 'package:beauty_textfield/beauty_textfield.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';

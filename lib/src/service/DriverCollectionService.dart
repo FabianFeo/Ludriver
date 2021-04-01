@@ -1,5 +1,5 @@
-import 'package:luconductora/src/model/Driver.model.dart';
-import 'package:luconductora/src/service/DriverSharePreferences.dart';
+import 'package:luconductora/src/model/driver.model.dart';
+import 'package:luconductora/src/service/driverSharePreferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserCollectionService {

@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
-import 'package:luconductora/src/service/AuthService.dart';
-import 'package:luconductora/src/view/CodigoVerificacion.dart';
+import 'package:luconductora/src/service/authService.dart';
+import 'package:luconductora/src/view/codigoVerificacion.dart';
 import 'package:flutter/material.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:luconductora/src/model/Driver.model.dart';
+import 'package:luconductora/src/model/driver.model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 

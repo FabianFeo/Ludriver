@@ -1,14 +1,14 @@
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:luconductora/src/model/Document.model.dart';
-import 'package:luconductora/src/view/CedulaCarga.dart';
-import 'package:luconductora/src/view/Licenciacarga.dart';
-import 'package:luconductora/src/view/Soatcarga.dart';
-import 'package:luconductora/src/view/Tarjetapropiedadcarga.dart';
-import 'package:luconductora/src/view/Tecnocarga.dart';
+import 'package:luconductora/src/model/document.model.dart';
+import 'package:luconductora/src/view/cedulaCarga.dart';
+import 'package:luconductora/src/view/licenciacarga.dart';
+import 'package:luconductora/src/view/soatcarga.dart';
+import 'package:luconductora/src/view/tarjetapropiedadcarga.dart';
+import 'package:luconductora/src/view/tecnocarga.dart';
 
-import 'ScannerCara.dart';
+import 'scannerCara.dart';
 
 class DocumentosDriver extends StatefulWidget {
   DocumentosDriver({Key key}) : super(key: key);

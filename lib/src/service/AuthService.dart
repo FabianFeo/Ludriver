@@ -1,11 +1,11 @@
-import 'package:luconductora/src/service/DriverCollectionService.dart';
-import 'package:luconductora/src/service/DriverSharePreferences.dart';
-import 'package:luconductora/src/view/DatosPersonal.dart';
-import 'package:luconductora/src/view/SignIn.dart';
+import 'package:luconductora/src/service/driverCollectionService.dart';
+import 'package:luconductora/src/service/driverSharePreferences.dart';
+import 'package:luconductora/src/view/datosPersonal.dart';
+import 'package:luconductora/src/view/signIn.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:luconductora/src/model/Driver.model.dart' as user show User;
+import 'package:luconductora/src/model/driver.model.dart' as user show User;
 
 class DriverService {
   static final DriverService _authService = DriverService._internal();

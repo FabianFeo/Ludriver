@@ -1,5 +1,5 @@
 import 'package:luconductora/src/service/contactosService.dart';
-import 'package:luconductora/src/view/FormularioConfianza.dart';
+import 'package:luconductora/src/view/formularioConfianza.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

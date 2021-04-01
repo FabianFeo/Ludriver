@@ -1,4 +1,4 @@
-import 'package:luconductora/src/model/Driver.model.dart';
+import 'package:luconductora/src/model/driver.model.dart';
 import 'databaseService.dart';
 import 'dart:math';
 import 'dart:typed_data';
@@ -26,7 +26,7 @@ class FaceNetService {
   List _predictedData;
   List get predictedData => this._predictedData;
 
-  //  saved users data  
+  //  saved users data
   dynamic data = {};
 
   Future loadModel() async {
@@ -40,8 +40,9 @@ class FaceNetService {
       //         TfLiteGpuInferencePriority.auto));
 
       // var interpreterOptions = InterpreterOptions()..addDelegate(gpuDelegateV2);
-      this._interpreter = await Interpreter.fromAsset('mobilefacenet.tflite',
-         );
+      this._interpreter = await Interpreter.fromAsset(
+        'mobilefacenet.tflite',
+      );
       print('model loaded successfully');
     } catch (e) {
       print('Failed to load model.');

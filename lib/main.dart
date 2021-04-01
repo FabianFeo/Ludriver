@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:luconductora/src/service/faceNetService.dart';
 import 'package:luconductora/src/service/mlVisionService.dart';
-import 'package:luconductora/src/view/Carga.dart';
+import 'package:luconductora/src/view/carga.dart';
 import 'package:flutter/material.dart';
 
 void main() {

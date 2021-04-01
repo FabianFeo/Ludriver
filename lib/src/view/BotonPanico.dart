@@ -1,6 +1,6 @@
-import 'package:luconductora/src/view/LuAlarmada.dart';
-import 'package:luconductora/src/view/LuPreocupada.dart';
-import 'package:luconductora/src/view/LuAsustada.dart';
+import 'package:luconductora/src/view/luAlarmada.dart';
+import 'package:luconductora/src/view/luPreocupada.dart';
+import 'package:luconductora/src/view/luAsustada.dart';
 import 'package:flutter/material.dart';
 
 class BotonPanico extends StatefulWidget {
