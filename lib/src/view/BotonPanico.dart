@@ -1,5 +1,5 @@
 import 'package:luconductora/src/view/luAlarmada.dart';
-import 'package:luconductora/src/view/luPreocupada.dart';
+//import 'package:luconductora/src/view/luPreocupada.dart';
 import 'package:luconductora/src/view/luAsustada.dart';
 import 'package:flutter/material.dart';
 
@@ -94,7 +94,7 @@ class _BotonPanicoState extends State<BotonPanico> {
                             )
                           ],
                         ),
-                        Column(
+                        /* Column(
                           children: [
                             GestureDetector(
                               child: Container(
@@ -123,7 +123,7 @@ class _BotonPanicoState extends State<BotonPanico> {
                               ),
                             )
                           ],
-                        ),
+                        ),*/
                         Column(
                           children: [
                             GestureDetector(

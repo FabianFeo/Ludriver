@@ -80,6 +80,8 @@ flutter:
     - assets/Logo/Lu_verde.png
     - assets/Logo/lu_back.png
     - assets/Logo/Blog_icono.png
+    - assets/Logo/Lu_yellow.png
+    - assets/Logo/Lu_red.png
   fonts:
     - family: Gotham
       fonts: 
