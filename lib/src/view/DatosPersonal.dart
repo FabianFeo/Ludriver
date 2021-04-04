@@ -1,10 +1,10 @@
-import 'package:luconductora/src/model/Driver.model.dart';
-import 'package:luconductora/src/view/CedulaDriver.dart';
+import 'package:luconductora/src/model/driver.model.dart';
+import 'package:luconductora/src/view/cedulaDriver.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:beauty_textfield/beauty_textfield.dart';
 
-import 'CedulaDriver.dart';
+import 'cedulaDriver.dart';
 
 class DatosPersonal extends StatefulWidget {
   DatosPersonal({Key key}) : super(key: key);

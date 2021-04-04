@@ -81,10 +81,15 @@ flutter:
     - assets/Logo/Lu_verde.png
     - assets/Logo/lu_back.png
     - assets/Logo/Blog_icono.png
+<<<<<<< HEAD
     - assets/IconosMarker/Auto.png
     - assets/IconosMarker/Lu_red.png
     - assets/IconosMarker/Lu_yellow.png
     - assets/IconosMarker/Markers.png
+=======
+    - assets/Logo/Lu_yellow.png
+    - assets/Logo/Lu_red.png
+>>>>>>> 4829214ef4174aceee1b827c505a382bf1fc0d84
   fonts:
     - family: Gotham
       fonts: 

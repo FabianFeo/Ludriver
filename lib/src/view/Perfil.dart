@@ -1,7 +1,7 @@
 import 'package:luconductora/src/view/takeFoto.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:luconductora/src/model/Driver.model.dart';
+import 'package:luconductora/src/model/driver.model.dart';
 
 class Perfil extends StatefulWidget {
   Perfil({Key key}) : super(key: key);
@@ -155,16 +155,6 @@ class _PerfilState extends State<Perfil> {
                                     margin: EdgeInsets.only(top: height / 8),
                                     child: Text(
                                       'Correo Electronico',
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: height / 8),
-                                    child: Text(
-                                      'Mis dispositivos',
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
                                         color: Colors.white,

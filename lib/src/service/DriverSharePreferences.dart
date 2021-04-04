@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:luconductora/src/model/Driver.model.dart';
+import 'package:luconductora/src/model/driver.model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserSharePreference {

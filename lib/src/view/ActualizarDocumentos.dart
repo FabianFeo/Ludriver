@@ -2,45 +2,39 @@ import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:luconductora/src/model/document.model.dart';
-import 'package:luconductora/src/view/cedulaCarga.dart';
 import 'package:luconductora/src/view/licenciacarga.dart';
 import 'package:luconductora/src/view/soatcarga.dart';
 import 'package:luconductora/src/view/tarjetapropiedadcarga.dart';
 import 'package:luconductora/src/view/tecnocarga.dart';
-
 import 'scannerCara.dart';
 
-class DocumentosDriver extends StatefulWidget {
-  DocumentosDriver({Key key}) : super(key: key);
+class ActualizarDocumentos extends StatefulWidget {
+  ActualizarDocumentos({Key key}) : super(key: key);
 
   @override
-  _DocumentosDriverState createState() => _DocumentosDriverState();
+  _ActualizarDocumentosState createState() => _ActualizarDocumentosState();
 }
 
 List<Documents> documentos = [
   Documents(
     'Licencia de conduccion',
-    'Autorizacion para conduccion de vehiculos',
+    'Actualizar la lisencia',
   ),
   Documents(
     'SOAT',
-    'Seguro Obligatorio de Accidentes de Tránsito',
+    'Actualizar el SOAT',
   ),
   Documents(
     'Tarjeta de Propiedad',
-    'Tarjeta de propiedad del vehiculo',
+    'Actualizar Tarjeta de propiedad',
   ),
   Documents(
     'Revision Tecnicomecanica',
-    'Revision del vehiculo',
+    'Actualizar revision tecnicomecanica',
   ),
-  Documents(
-    'documento de identificacion',
-    'cedula de ciudadania o extrangeria',
-  )
 ];
 
-class _DocumentosDriverState extends State<DocumentosDriver> {
+class _ActualizarDocumentosState extends State<ActualizarDocumentos> {
   double height = 0;
   double width = 0;
   List<CameraDescription> cameras;
@@ -70,7 +64,7 @@ class _DocumentosDriverState extends State<DocumentosDriver> {
                 Container(
                   child: Center(
                     child: Text(
-                      'Documentos de la conductora',
+                      'Actualizacion de documentos de la conductora',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: height / 20,
@@ -104,7 +98,7 @@ class _DocumentosDriverState extends State<DocumentosDriver> {
                   margin: EdgeInsets.all(20),
                   child: Center(
                     child: Text(
-                      'Por favor ingresa una foto o archivo de los siguietes documentos, para completar tu registro',
+                      'Por favor ingresa una foto o archivo de los documentos para ser actualizados en el sistema',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Color.fromRGBO(40, 1, 102, 1),
@@ -152,13 +146,6 @@ class _DocumentosDriverState extends State<DocumentosDriver> {
                                       MaterialPageRoute(
                                           builder: (context) => TecnoMcarga()));
                                   break;
-                                case 4:
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              CedulaDriver()));
-                                  break;
                               }
                             });
                           },
@@ -200,7 +187,7 @@ class _DocumentosDriverState extends State<DocumentosDriver> {
                         width: width / 2,
                         height: height / 20,
                         child: Text(
-                          "Continuar",
+                          "Actualizar",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Color.fromRGBO(255, 255, 255, 1),

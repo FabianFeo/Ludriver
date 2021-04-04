@@ -1,10 +1,10 @@
-import 'package:luconductora/src/model/Driver.model.dart';
+import 'package:luconductora/src/model/driver.model.dart';
 import 'package:luconductora/src/service/databaseService.dart';
 import 'package:luconductora/src/service/faceNetService.dart';
-import 'package:luconductora/src/service/DriverCollectionService.dart';
+import 'package:luconductora/src/service/driverCollectionService.dart';
 //import 'package:NoEstasSola/src/view/index.dart';
 import 'package:flutter/material.dart';
-import 'package:luconductora/src/view/Index.dart';
+import 'package:luconductora/src/view/index.dart';
 
 class AuthActionButton extends StatefulWidget {
   AuthActionButton(

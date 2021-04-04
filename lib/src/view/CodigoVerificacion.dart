@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:luconductora/src/service/AuthService.dart';
+import 'package:luconductora/src/service/authService.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 
