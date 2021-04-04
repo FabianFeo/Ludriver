@@ -20,7 +20,7 @@ class _CargaState extends State<Carga> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset('assets/video/carga.mp4')
+    _controller = VideoPlayerController.asset('assets/video/Logo_lu_driver_animacion.mp4')
       ..initialize().then((_) {
         Future.delayed(Duration(seconds: 4), () {
           DriverService authService = DriverService();

@@ -85,6 +85,7 @@ flutter:
     - assets/IconosMarker/Lu_red.png
     - assets/IconosMarker/Lu_yellow.png
     - assets/IconosMarker/Markers.png
+    - assets/video/Logo_lu_driver_animacion.mp4
   fonts:
     - family: Gotham
       fonts: 
