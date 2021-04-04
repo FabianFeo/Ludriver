@@ -4,7 +4,6 @@ import 'package:luconductora/src/model/driver.model.dart';
 import 'package:luconductora/src/view/BlogDriver.dart';
 import 'package:luconductora/src/view/BotonPanicoDriver.dart';
 import 'package:luconductora/src/view/ayuda.dart';
-import 'package:luconductora/src/view/blog.dart';
 import 'package:luconductora/src/view/carga.dart';
 import 'package:luconductora/src/view/configuracion.dart';
 import 'package:luconductora/src/view/contactoconfianza.dart';
@@ -15,7 +14,6 @@ import 'package:luconductora/src/view/perfil.dart';
 import 'package:luconductora/src/service/authService.dart';
 import 'package:luconductora/src/view/payment.dart';
 
-import 'botonPanico.dart';
 
 class Index extends StatefulWidget {
   Index({Key key}) : super(key: key);
