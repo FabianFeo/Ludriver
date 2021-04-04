@@ -2,6 +2,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:luconductora/src/model/Driver.model.dart';
 import 'package:luconductora/src/view/Ayuda.dart';
+import 'package:luconductora/src/view/BlogDriver.dart';
+import 'package:luconductora/src/view/BotonPanicoDriver.dart';
 import 'package:luconductora/src/view/Carga.dart';
 import 'package:luconductora/src/view/Configuracion.dart';
 import 'package:luconductora/src/view/Contactoconfianza.dart';
@@ -79,14 +81,14 @@ class _IndexState extends State<Index> {
             setState(() {
               switch (index) {
                 case 0:
-                  pageCurrent = Container();
+                  pageCurrent = BlogDriver();
                   break;
                 case 1:
                   pageCurrent = MapaPage();
 
                   break;
                 case 2:
-                  pageCurrent = Container();
+                  pageCurrent = BotonPanicoDriver();
                   break;
               }
               _page = index;

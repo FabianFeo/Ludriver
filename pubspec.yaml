@@ -77,9 +77,14 @@ flutter:
     - assets/Logo/Conductora.png
     - assets/Logo/Usuaria.png
     - assets/video/carga.mp4
+    - assets/video/Logo_lu_driver_animacion_transparente.gif
     - assets/Logo/Lu_verde.png
     - assets/Logo/lu_back.png
     - assets/Logo/Blog_icono.png
+    - assets/IconosMarker/Auto.png
+    - assets/IconosMarker/Lu_red.png
+    - assets/IconosMarker/Lu_yellow.png
+    - assets/IconosMarker/Markers.png
   fonts:
     - family: Gotham
       fonts: 
