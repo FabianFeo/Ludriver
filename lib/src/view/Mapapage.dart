@@ -120,7 +120,7 @@ class _MapaPageState extends State<MapaPage> {
                                         AsyncSnapshot<DocumentSnapshot>
                                             snapshot2) {
                                       return snapshot2.hasData
-                                          ? Container(                                            
+                                          ? Container(
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(15)),
@@ -212,7 +212,7 @@ class _MapaPageState extends State<MapaPage> {
                                                   ),
                                                   Container(
                                                     margin: EdgeInsets.only(
-                                                            top: height / 50),
+                                                        top: height / 50),
                                                     child: Text(
                                                       'Punto de encuentro',
                                                       style: TextStyle(
@@ -226,7 +226,7 @@ class _MapaPageState extends State<MapaPage> {
                                                   ),
                                                   Container(
                                                     margin: EdgeInsets.only(
-                                                            top: height / 50),
+                                                        top: height / 50),
                                                     child: Container(
                                                       height: height / 15,
                                                       width: width / 1.5,
@@ -258,10 +258,9 @@ class _MapaPageState extends State<MapaPage> {
                                                               height / 50),
                                                     ),
                                                   ),
-
                                                   Container(
                                                     margin: EdgeInsets.only(
-                                                            top: height / 50),
+                                                        top: height / 50),
                                                     child: Container(
                                                       width: width / 1.5,
                                                       child: Text(
@@ -280,6 +279,33 @@ class _MapaPageState extends State<MapaPage> {
                                                       ),
                                                     ),
                                                   ),
+                                                  Container(
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                      children: [
+                                                        Container(
+                                                          margin:EdgeInsets.only(top: height /50),
+                                                          child: GestureDetector(child: 
+                                                          CircleAvatar(
+                                                              backgroundColor: Color.fromRGBO(102, 51, 204, 1),
+                                                              radius:height / 28,
+                                                              child: Icon(Icons.highlight_off,
+                                                              color: Color.fromRGBO(207, 197, 239, 1)),),
+                                                              onTap: () {},
+                                                        )),
+                                                        Container(
+                                                          margin:EdgeInsets.only(top: height /50),
+                                                          child: GestureDetector(child: 
+                                                          CircleAvatar(
+                                                              backgroundColor: Color.fromRGBO(102, 51, 204, 1),
+                                                              radius:height / 28,
+                                                              child: Icon(Icons.check_circle_outline,
+                                                              color: Color.fromRGBO(207, 197, 239, 1)),),
+                                                              onTap: () {},
+                                                        )),
+                                                      ],
+                                                    ),
+                                                  )
                                                 ],
                                               ),
                                             )
