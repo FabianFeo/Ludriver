@@ -71,7 +71,7 @@ class _BotonPanicoDriverState extends State<BotonPanicoDriver> {
                                 child: Container(
                                   child: Image(
                                     image:
-                                        AssetImage('assets/IconosMarker/Lu_yellow.png'),
+                                        AssetImage('Lu_yellow_sombra.png'),
                                   ),
                                 ),
                               ),

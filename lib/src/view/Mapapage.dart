@@ -120,7 +120,7 @@ class _MapaPageState extends State<MapaPage> {
                                         AsyncSnapshot<DocumentSnapshot>
                                             snapshot2) {
                                       return snapshot2.hasData
-                                          ? Container(
+                                          ? Container(                                            
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(15)),
