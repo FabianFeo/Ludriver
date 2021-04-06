@@ -6,7 +6,7 @@ class ContactosService {
   User _usuario = User();
   Future pushEmergenciContact(String nombre, String telefono) {
     return firestore
-        .collection('users')
+        .collection('drivers')
         .doc(_usuario.userUuid)
         .collection('contactosEmergencia')
         .add({'nombre': nombre, 'telefono': telefono});
@@ -14,7 +14,7 @@ class ContactosService {
 
   Stream<QuerySnapshot> getEmergenciContactsStream() {
     return firestore
-        .collection('users')
+        .collection('drivers')
         .doc(_usuario.userUuid)
         .collection('contactosEmergencia')
         .snapshots();
