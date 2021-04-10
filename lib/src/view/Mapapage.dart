@@ -23,6 +23,7 @@ class _MapaPageState extends State<MapaPage> {
   lo.Location _location = lo.Location();
   Timer timer;
   bool showCurrentPosition = true;
+  bool iniciarViaje = false;
   LatLng startCoordinates;
   double kmFilter = 5;
   ViajesService viajesService = ViajesService();
@@ -281,28 +282,72 @@ class _MapaPageState extends State<MapaPage> {
                                                   ),
                                                   Container(
                                                     child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
                                                       children: [
                                                         Container(
-                                                          margin:EdgeInsets.only(top: height /50),
-                                                          child: GestureDetector(child: 
-                                                          CircleAvatar(
-                                                              backgroundColor: Color.fromRGBO(102, 51, 204, 1),
-                                                              radius:height / 28,
-                                                              child: Icon(Icons.highlight_off,
-                                                              color: Color.fromRGBO(207, 197, 239, 1)),),
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    top:
+                                                                        height /
+                                                                            50),
+                                                            child:
+                                                                GestureDetector(
+                                                              child:
+                                                                  CircleAvatar(
+                                                                backgroundColor:
+                                                                    Color
+                                                                        .fromRGBO(
+                                                                            102,
+                                                                            51,
+                                                                            204,
+                                                                            1),
+                                                                radius:
+                                                                    height / 28,
+                                                                child: Icon(
+                                                                    Icons
+                                                                        .highlight_off,
+                                                                    color: Color
+                                                                        .fromRGBO(
+                                                                            207,
+                                                                            197,
+                                                                            239,
+                                                                            1)),
+                                                              ),
                                                               onTap: () {},
-                                                        )),
+                                                            )),
                                                         Container(
-                                                          margin:EdgeInsets.only(top: height /50),
-                                                          child: GestureDetector(child: 
-                                                          CircleAvatar(
-                                                              backgroundColor: Color.fromRGBO(102, 51, 204, 1),
-                                                              radius:height / 28,
-                                                              child: Icon(Icons.check_circle_outline,
-                                                              color: Color.fromRGBO(207, 197, 239, 1)),),
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    top:
+                                                                        height /
+                                                                            50),
+                                                            child:
+                                                                GestureDetector(
+                                                              child:
+                                                                  CircleAvatar(
+                                                                backgroundColor:
+                                                                    Color
+                                                                        .fromRGBO(
+                                                                            102,
+                                                                            51,
+                                                                            204,
+                                                                            1),
+                                                                radius:
+                                                                    height / 28,
+                                                                child: Icon(
+                                                                    Icons
+                                                                        .check_circle_outline,
+                                                                    color: Color
+                                                                        .fromRGBO(
+                                                                            207,
+                                                                            197,
+                                                                            239,
+                                                                            1)),
+                                                              ),
                                                               onTap: () {},
-                                                        )),
+                                                            )),
                                                       ],
                                                     ),
                                                   )
@@ -370,3 +415,132 @@ class _MapaPageState extends State<MapaPage> {
     });
   }
 }
+/*
+: Container(),
+        showEstoyLista
+            ? Card()
+            : Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Row(
+                        children: [
+                          Container(
+                              margin: EdgeInsets.only(top: height / 2.8),
+                              child: Center(
+                                  child: Container(
+                                height: height / 2.9,
+                                width: width / 1.15,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                  color: Color.fromRGBO(207, 197, 239, 1),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(top: height / 155),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image(
+                                            height: height / 10,
+                                            image: AssetImage(
+                                                'assets/Logo/Lu_logo.png'),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Container(
+                                              height: height / 22,
+                                              margin: EdgeInsets.only(
+                                                  right: width / 6),
+                                              child: Text(
+                                                '  Conductora:',
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      102, 51, 204, 1),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              height: height / 22,
+                                              margin: EdgeInsets.only(
+                                                  right: width / 4.5),
+                                              child: Text(
+                                                'Modelo:',
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      102, 51, 204, 1),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              height: height / 22,
+                                              margin: EdgeInsets.only(
+                                                  right: width / 3.8),
+                                              child: Text(
+                                                'Placa:',
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      102, 51, 204, 1),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                        child: BouncingWidget(
+                                            duration:
+                                                Duration(milliseconds: 100),
+                                            scaleFactor: 1.5,
+                                            onPressed: () {},
+                                            child: Card(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(50.0),
+                                              ),
+                                              color: Color.fromRGBO(
+                                                  101, 79, 168, 1),
+                                              child: Container(
+                                                width: width / 4,
+                                                height: height / 30,
+                                                child: Text(
+                                                  "Lista.",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      color: Color.fromRGBO(
+                                                          255, 255, 255, 1),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 17),
+                                                ),
+                                              ),
+                                            )))
+                                  ],
+                                ),
+                              )))
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+*/
