@@ -8,6 +8,7 @@ import 'package:location/location.dart' as lo;
 import 'package:location/location.dart';
 import 'package:luconductora/src/service/viajesService.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:bouncing_widget/bouncing_widget.dart';
 
 class MapaPage extends StatefulWidget {
   MapaPage({Key key}) : super(key: key);
@@ -415,9 +416,10 @@ class _MapaPageState extends State<MapaPage> {
     });
   }
 }
+
 /*
 : Container(),
-        showEstoyLista
+        iniciarViaje
             ? Card()
             : Container(
                 child: Row(
@@ -450,7 +452,7 @@ class _MapaPageState extends State<MapaPage> {
                                           Image(
                                             height: height / 10,
                                             image: AssetImage(
-                                                'assets/Logo/Lu_logo.png'),
+                                                'assets/Logo/Lu_conductora.png'),
                                           ),
                                         ],
                                       ),
@@ -466,7 +468,7 @@ class _MapaPageState extends State<MapaPage> {
                                               margin: EdgeInsets.only(
                                                   right: width / 6),
                                               child: Text(
-                                                '  Conductora:',
+                                                '  Usuaria:',
                                                 textAlign: TextAlign.left,
                                                 style: TextStyle(
                                                   color: Color.fromRGBO(
@@ -480,7 +482,7 @@ class _MapaPageState extends State<MapaPage> {
                                               margin: EdgeInsets.only(
                                                   right: width / 4.5),
                                               child: Text(
-                                                'Modelo:',
+                                                'direccion usuaria:',
                                                 textAlign: TextAlign.left,
                                                 style: TextStyle(
                                                   color: Color.fromRGBO(
@@ -494,7 +496,7 @@ class _MapaPageState extends State<MapaPage> {
                                               margin: EdgeInsets.only(
                                                   right: width / 3.8),
                                               child: Text(
-                                                'Placa:',
+                                                'destino:',
                                                 textAlign: TextAlign.left,
                                                 style: TextStyle(
                                                   color: Color.fromRGBO(
@@ -524,7 +526,7 @@ class _MapaPageState extends State<MapaPage> {
                                                 width: width / 4,
                                                 height: height / 30,
                                                 child: Text(
-                                                  "Lista.",
+                                                  "empezar viaje.",
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: Color.fromRGBO(
