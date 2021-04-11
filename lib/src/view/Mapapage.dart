@@ -421,128 +421,160 @@ class _MapaPageState extends State<MapaPage> {
 : Container(),
         iniciarViaje
             ? Card()
-            : Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          Container(
-                              margin: EdgeInsets.only(top: height / 2.8),
-                              child: Center(
-                                  child: Container(
-                                height: height / 2.9,
-                                width: width / 1.15,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                  color: Color.fromRGBO(207, 197, 239, 1),
-                                ),
-                                child: Column(
+                    : Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                child: Row(
                                   children: [
                                     Container(
-                                      margin:
-                                          EdgeInsets.only(top: height / 155),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Image(
-                                            height: height / 10,
-                                            image: AssetImage(
-                                                'assets/Logo/Lu_conductora.png'),
+                                        margin:
+                                            EdgeInsets.only(top: height / 2.8),
+                                        child: Center(
+                                            child: Container(
+                                          height: height / 2.9,
+                                          width: width / 1.15,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(15),
+                                            ),
+                                            color: Color.fromRGBO(
+                                                207, 197, 239, 1),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Container(
-                                              height: height / 22,
-                                              margin: EdgeInsets.only(
-                                                  right: width / 6),
-                                              child: Text(
-                                                '  Usuaria:',
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      102, 51, 204, 1),
-                                                  fontWeight: FontWeight.w500,
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                    top: height / 155),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Image(
+                                                      height: height / 10,
+                                                      image: AssetImage(
+                                                          'assets/Logo/Conductora.png'),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                            ),
-                                            Container(
-                                              height: height / 22,
-                                              margin: EdgeInsets.only(
-                                                  right: width / 4.5),
-                                              child: Text(
-                                                'direccion usuaria:',
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      102, 51, 204, 1),
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Column(
+                                                    children: [
+                                                      Container(
+                                                        height: height / 22,
+                                                        margin: EdgeInsets.only(
+                                                            right: width / 4),
+                                                        child: Text(
+                                                          '  Usuaria:',
+                                                          textAlign:
+                                                              TextAlign.left,
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    102,
+                                                                    51,
+                                                                    204,
+                                                                    1),
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        height: height / 22,
+                                                        margin: EdgeInsets.only(
+                                                            right: width / 4),
+                                                        child: Text(
+                                                          '   Direccion:',
+                                                          textAlign:
+                                                              TextAlign.left,
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    102,
+                                                                    51,
+                                                                    204,
+                                                                    1),
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        height: height / 22,
+                                                        margin: EdgeInsets.only(
+                                                            right: width / 4),
+                                                        child: Text(
+                                                          'Destino:',
+                                                          textAlign:
+                                                              TextAlign.left,
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    102,
+                                                                    51,
+                                                                    204,
+                                                                    1),
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
                                               ),
-                                            ),
-                                            Container(
-                                              height: height / 22,
-                                              margin: EdgeInsets.only(
-                                                  right: width / 3.8),
-                                              child: Text(
-                                                'destino:',
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      102, 51, 204, 1),
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                        child: BouncingWidget(
-                                            duration:
-                                                Duration(milliseconds: 100),
-                                            scaleFactor: 1.5,
-                                            onPressed: () {},
-                                            child: Card(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(50.0),
-                                              ),
-                                              color: Color.fromRGBO(
-                                                  101, 79, 168, 1),
-                                              child: Container(
-                                                width: width / 4,
-                                                height: height / 30,
-                                                child: Text(
-                                                  "empezar viaje.",
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          255, 255, 255, 1),
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 17),
-                                                ),
-                                              ),
-                                            )))
+                                              Container(
+                                                  child: BouncingWidget(
+                                                      duration: Duration(
+                                                          milliseconds: 100),
+                                                      scaleFactor: 1.5,
+                                                      onPressed: () {},
+                                                      child: Card(
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      50.0),
+                                                        ),
+                                                        color: Color.fromRGBO(
+                                                            101, 79, 168, 1),
+                                                        child: Container(
+                                                          width: width / 4,
+                                                          height: height / 30,
+                                                          child: Text(
+                                                            "empezar viaje.",
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        255,
+                                                                        255,
+                                                                        255,
+                                                                        1),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 17),
+                                                          ),
+                                                        ),
+                                                      )))
+                                            ],
+                                          ),
+                                        )))
                                   ],
                                 ),
-                              )))
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                              ),
+                            ],
+                          ),
+                        )
+                
 */
