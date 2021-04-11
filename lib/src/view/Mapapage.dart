@@ -24,7 +24,7 @@ class _MapaPageState extends State<MapaPage> {
   lo.Location _location = lo.Location();
   Timer timer;
   bool showCurrentPosition = true;
-  bool iniciarViaje = false;
+  bool iniciarViaje = true;
   LatLng startCoordinates;
   double kmFilter = 5;
   ViajesService viajesService = ViajesService();
@@ -64,328 +64,398 @@ class _MapaPageState extends State<MapaPage> {
                         ),
                       ),
                     ),
-                    Center(
-                        child: StreamBuilder(
-                            stream: viajesService.getViajes(),
-                            builder:
-                                (_, AsyncSnapshot<QuerySnapshot> snapshot) {
-                              if (snapshot.data != null &&
-                                  snapshot.data.docs.length != 0) {
-                                List<QueryDocumentSnapshot> sitanciaFilter =
-                                    snapshot.data.docs.where((element) {
-                                  return calculateDistance(
-                                              startCoordinates.latitude,
-                                              startCoordinates.longitude,
-                                              element.data()['latInicio'],
-                                              element.data()['lanInicio']) /
-                                          1000 <=
-                                      kmFilter;
-                                }).toList();
+                    iniciarViaje
+                        ? Center(
+                            child: Container(
+                              margin: EdgeInsets.only(top: height / 1.3),
+                              child: BouncingWidget(
+                                  duration: Duration(milliseconds: 100),
+                                  scaleFactor: 1.5,
+                                  onPressed: () {},
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50.0),
+                                    ),
+                                    color: Color.fromRGBO(101, 79, 168, 1),
+                                    child: Container(
+                                      width: width / 1.5,
+                                      height: height / 20,
+                                      child: Text(
+                                        "Iniciar viaje",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(
+                                                255, 255, 255, 1),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 25),
+                                      ),
+                                    ),
+                                  )),
+                            ),
+                          )
+                        : Center(
+                            child: StreamBuilder(
+                                stream: viajesService.getViajes(),
+                                builder:
+                                    (_, AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  if (snapshot.data != null &&
+                                      snapshot.data.docs.length != 0) {
+                                    List<QueryDocumentSnapshot> sitanciaFilter =
+                                        snapshot.data.docs.where((element) {
+                                      return calculateDistance(
+                                                  startCoordinates.latitude,
+                                                  startCoordinates.longitude,
+                                                  element.data()['latInicio'],
+                                                  element.data()['lanInicio']) /
+                                              1000 <=
+                                          kmFilter;
+                                    }).toList();
 
-                                // if ((timer == null || !timer.isActive) &&
-                                //     kmFilter < 5) {
-                                //   Timer.periodic(Duration(seconds: 5),
-                                //       (iterasion) {
-                                //     setState(() {
-                                //       timer = iterasion;
-                                //       kmFilter += 1;
-                                //     });
-                                //     if (kmFilter >= 5) {
-                                //       iterasion.cancel();
-                                //     }
-                                //   });
-                                // }
+                                    // if ((timer == null || !timer.isActive) &&
+                                    //     kmFilter < 5) {
+                                    //   Timer.periodic(Duration(seconds: 5),
+                                    //       (iterasion) {
+                                    //     setState(() {
+                                    //       timer = iterasion;
+                                    //       kmFilter += 1;
+                                    //     });
+                                    //     if (kmFilter >= 5) {
+                                    //       iterasion.cancel();
+                                    //     }
+                                    //   });
+                                    // }
 
-                                return TinderSwapCard(
-                                  swipeUp: true,
-                                  swipeDown: true,
-                                  orientation: AmassOrientation.BOTTOM,
-                                  totalNum: sitanciaFilter.length,
-                                  stackNum: 3,
-                                  swipeEdge: 4.0,
-                                  maxWidth:
-                                      MediaQuery.of(context).size.width * 0.9,
-                                  maxHeight:
-                                      MediaQuery.of(context).size.width * 1.2,
-                                  minWidth:
-                                      MediaQuery.of(context).size.width * 0.8,
-                                  minHeight:
-                                      MediaQuery.of(context).size.width * 0.8,
-                                  cardBuilder: (context, index) => Card(
-                                      child: FutureBuilder(
-                                    future: firestore
-                                        .collection('users')
-                                        .doc(sitanciaFilter[index]
-                                            .data()['idCliente'])
-                                        .get(),
-                                    builder: (_,
-                                        AsyncSnapshot<DocumentSnapshot>
-                                            snapshot2) {
-                                      return snapshot2.hasData
-                                          ? Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(15)),
-                                                color: Color.fromRGBO(
-                                                    207, 197, 239, 1),
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        top: height / 50),
-                                                    child: Text(
-                                                      'Viaje disponible',
-                                                      style: TextStyle(
-                                                          color: Color.fromRGBO(
-                                                              102, 51, 204, 1),
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize:
-                                                              height / 35),
-                                                    ),
+                                    return TinderSwapCard(
+                                      swipeUp: true,
+                                      swipeDown: true,
+                                      orientation: AmassOrientation.BOTTOM,
+                                      totalNum: sitanciaFilter.length,
+                                      stackNum: 3,
+                                      swipeEdge: 4.0,
+                                      maxWidth:
+                                          MediaQuery.of(context).size.width *
+                                              0.9,
+                                      maxHeight:
+                                          MediaQuery.of(context).size.width *
+                                              1.2,
+                                      minWidth:
+                                          MediaQuery.of(context).size.width *
+                                              0.8,
+                                      minHeight:
+                                          MediaQuery.of(context).size.width *
+                                              0.8,
+                                      cardBuilder: (context, index) => Card(
+                                          child: FutureBuilder(
+                                        future: firestore
+                                            .collection('users')
+                                            .doc(sitanciaFilter[index]
+                                                .data()['idCliente'])
+                                            .get(),
+                                        builder: (_,
+                                            AsyncSnapshot<DocumentSnapshot>
+                                                snapshot2) {
+                                          return snapshot2.hasData
+                                              ? Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                15)),
+                                                    color: Color.fromRGBO(
+                                                        207, 197, 239, 1),
                                                   ),
-                                                  Container(
-                                                      margin: EdgeInsets.only(
-                                                          top: height / 50),
-                                                      height: height / 7,
-                                                      child: CircleAvatar(
-                                                        radius: 60,
-                                                        backgroundImage: snapshot2
-                                                                        .data
-                                                                        .data()[
-                                                                    'profileImage'] ==
-                                                                null
-                                                            ? AssetImage(
-                                                                'Conductora.png')
-                                                            : NetworkImage(snapshot2
-                                                                    .data
-                                                                    .data()[
-                                                                'profileImage']),
-                                                      )),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
+                                                  child: Column(
                                                     children: [
                                                       Container(
                                                         margin: EdgeInsets.only(
                                                             top: height / 50),
                                                         child: Text(
-                                                          snapshot2.data
-                                                                  .data()[
-                                                                      'firstName']
-                                                                  .toString() +
-                                                              '',
+                                                          'Viaje disponible',
                                                           style: TextStyle(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    102,
-                                                                    51,
-                                                                    204,
-                                                                    1),
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                          ),
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      102,
+                                                                      51,
+                                                                      204,
+                                                                      1),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize:
+                                                                  height / 35),
                                                         ),
+                                                      ),
+                                                      Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  top: height /
+                                                                      50),
+                                                          height: height / 7,
+                                                          child: CircleAvatar(
+                                                            radius: 60,
+                                                            backgroundImage: snapshot2
+                                                                            .data
+                                                                            .data()[
+                                                                        'profileImage'] ==
+                                                                    null
+                                                                ? AssetImage(
+                                                                    'Conductora.png')
+                                                                : NetworkImage(
+                                                                    snapshot2
+                                                                            .data
+                                                                            .data()[
+                                                                        'profileImage']),
+                                                          )),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    top:
+                                                                        height /
+                                                                            50),
+                                                            child: Text(
+                                                              snapshot2.data
+                                                                      .data()[
+                                                                          'firstName']
+                                                                      .toString() +
+                                                                  '',
+                                                              style: TextStyle(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        102,
+                                                                        51,
+                                                                        204,
+                                                                        1),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    top:
+                                                                        height /
+                                                                            50),
+                                                            child: Text(
+                                                              snapshot2.data
+                                                                      .data()[
+                                                                          'lastname']
+                                                                      .toString() +
+                                                                  '',
+                                                              style: TextStyle(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        102,
+                                                                        51,
+                                                                        204,
+                                                                        1),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                       Container(
                                                         margin: EdgeInsets.only(
                                                             top: height / 50),
                                                         child: Text(
-                                                          snapshot2.data
-                                                                  .data()[
-                                                                      'lastname']
-                                                                  .toString() +
-                                                              '',
+                                                          'Punto de encuentro',
                                                           style: TextStyle(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    102,
-                                                                    51,
-                                                                    204,
-                                                                    1),
-                                                            fontWeight:
-                                                                FontWeight.w500,
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      102,
+                                                                      51,
+                                                                      204,
+                                                                      1),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize:
+                                                                  height / 50),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                            top: height / 50),
+                                                        child: Container(
+                                                          height: height / 15,
+                                                          width: width / 1.5,
+                                                          child: Text(
+                                                            sitanciaFilter[
+                                                                    index]
+                                                                .data()[
+                                                                    'direccionInicio']
+                                                                .toString(),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      102,
+                                                                      51,
+                                                                      204,
+                                                                      1),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
+                                                      Container(
+                                                        child: Text(
+                                                          'Punto de destino',
+                                                          style: TextStyle(
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      102,
+                                                                      51,
+                                                                      204,
+                                                                      1),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize:
+                                                                  height / 50),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                            top: height / 50),
+                                                        child: Container(
+                                                          width: width / 1.5,
+                                                          child: Text(
+                                                            sitanciaFilter[
+                                                                    index]
+                                                                .data()[
+                                                                    'direccionDestino']
+                                                                .toString(),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      102,
+                                                                      51,
+                                                                      204,
+                                                                      1),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: [
+                                                            Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        top: height /
+                                                                            50),
+                                                                child:
+                                                                    GestureDetector(
+                                                                  child:
+                                                                      CircleAvatar(
+                                                                    backgroundColor:
+                                                                        Color.fromRGBO(
+                                                                            102,
+                                                                            51,
+                                                                            204,
+                                                                            1),
+                                                                    radius:
+                                                                        height /
+                                                                            28,
+                                                                    child: Icon(
+                                                                        Icons
+                                                                            .highlight_off,
+                                                                        color: Color.fromRGBO(
+                                                                            207,
+                                                                            197,
+                                                                            239,
+                                                                            1)),
+                                                                  ),
+                                                                  onTap: () {},
+                                                                )),
+                                                            Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        top: height /
+                                                                            50),
+                                                                child:
+                                                                    GestureDetector(
+                                                                  child:
+                                                                      CircleAvatar(
+                                                                    backgroundColor:
+                                                                        Color.fromRGBO(
+                                                                            102,
+                                                                            51,
+                                                                            204,
+                                                                            1),
+                                                                    radius:
+                                                                        height /
+                                                                            28,
+                                                                    child: Icon(
+                                                                        Icons
+                                                                            .check_circle_outline,
+                                                                        color: Color.fromRGBO(
+                                                                            207,
+                                                                            197,
+                                                                            239,
+                                                                            1)),
+                                                                  ),
+                                                                  onTap: () {},
+                                                                )),
+                                                          ],
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        top: height / 50),
-                                                    child: Text(
-                                                      'Punto de encuentro',
-                                                      style: TextStyle(
-                                                          color: Color.fromRGBO(
-                                                              102, 51, 204, 1),
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize:
-                                                              height / 50),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        top: height / 50),
-                                                    child: Container(
-                                                      height: height / 15,
-                                                      width: width / 1.5,
-                                                      child: Text(
-                                                        sitanciaFilter[index]
-                                                            .data()[
-                                                                'direccionInicio']
-                                                            .toString(),
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: TextStyle(
-                                                          color: Color.fromRGBO(
-                                                              102, 51, 204, 1),
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    child: Text(
-                                                      'Punto de destino',
-                                                      style: TextStyle(
-                                                          color: Color.fromRGBO(
-                                                              102, 51, 204, 1),
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize:
-                                                              height / 50),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        top: height / 50),
-                                                    child: Container(
-                                                      width: width / 1.5,
-                                                      child: Text(
-                                                        sitanciaFilter[index]
-                                                            .data()[
-                                                                'direccionDestino']
-                                                            .toString(),
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: TextStyle(
-                                                          color: Color.fromRGBO(
-                                                              102, 51, 204, 1),
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      children: [
-                                                        Container(
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    top:
-                                                                        height /
-                                                                            50),
-                                                            child:
-                                                                GestureDetector(
-                                                              child:
-                                                                  CircleAvatar(
-                                                                backgroundColor:
-                                                                    Color
-                                                                        .fromRGBO(
-                                                                            102,
-                                                                            51,
-                                                                            204,
-                                                                            1),
-                                                                radius:
-                                                                    height / 28,
-                                                                child: Icon(
-                                                                    Icons
-                                                                        .highlight_off,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            207,
-                                                                            197,
-                                                                            239,
-                                                                            1)),
-                                                              ),
-                                                              onTap: () {},
-                                                            )),
-                                                        Container(
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    top:
-                                                                        height /
-                                                                            50),
-                                                            child:
-                                                                GestureDetector(
-                                                              child:
-                                                                  CircleAvatar(
-                                                                backgroundColor:
-                                                                    Color
-                                                                        .fromRGBO(
-                                                                            102,
-                                                                            51,
-                                                                            204,
-                                                                            1),
-                                                                radius:
-                                                                    height / 28,
-                                                                child: Icon(
-                                                                    Icons
-                                                                        .check_circle_outline,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            207,
-                                                                            197,
-                                                                            239,
-                                                                            1)),
-                                                              ),
-                                                              onTap: () {},
-                                                            )),
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            )
-                                          : Container(
-                                              child:
-                                                  CircularProgressIndicator(),
-                                            );
-                                    },
-                                  ) // Card(
-                                      //     child: Text(snapshot.data.docs[index]
-                                      //         .data()['direccionInicio']
-                                      //         .toString())),
-                                      ),
-                                  cardController: controller = CardController(),
-                                  swipeUpdateCallback:
-                                      (DragUpdateDetails details,
-                                          Alignment align) {
-                                    /// Get swiping card's alignment
-                                    if (align.x < 0) {
-                                      //Card is LEFT swiping
-                                    } else if (align.x > 0) {
-                                      //Card is RIGHT swiping
-                                    }
-                                  },
-                                  swipeCompleteCallback:
-                                      (CardSwipeOrientation orientation,
-                                          int index) {
-                                    /// Get orientation & index of swiped card!
-                                  },
-                                );
-                              } else {
-                                return Container();
-                              }
-                            }))
+                                                )
+                                              : Container(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                );
+                                        },
+                                      ) // Card(
+                                          //     child: Text(snapshot.data.docs[index]
+                                          //         .data()['direccionInicio']
+                                          //         .toString())),
+                                          ),
+                                      cardController: controller =
+                                          CardController(),
+                                      swipeUpdateCallback:
+                                          (DragUpdateDetails details,
+                                              Alignment align) {
+                                        /// Get swiping card's alignment
+                                        if (align.x < 0) {
+                                          //Card is LEFT swiping
+                                        } else if (align.x > 0) {
+                                          //Card is RIGHT swiping
+                                        }
+                                      },
+                                      swipeCompleteCallback:
+                                          (CardSwipeOrientation orientation,
+                                              int index) {
+                                        /// Get orientation & index of swiped card!
+                                      },
+                                    );
+                                  } else {
+                                    return Container();
+                                  }
+                                }))
                   ],
                 ),
               ),
