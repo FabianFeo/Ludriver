@@ -8,6 +8,7 @@ import 'package:location/location.dart' as lo;
 import 'package:location/location.dart';
 import 'package:luconductora/src/service/DriverSharePreferences.dart';
 import 'package:luconductora/src/service/serviceAcceptService.dart';
+import 'package:luconductora/src/service/DriverTravelPreference.dart';
 import 'package:luconductora/src/service/viajesService.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
@@ -451,9 +452,17 @@ class _MapaPageState extends State<MapaPage> {
                                                                             (value) {
                                                                       setState(
                                                                           () {
-                                                                        viaje = snapshot2
-                                                                            .data
-                                                                            .data();
+                                                                        viaje =
+                                                                            sitanciaFilter[index].data();
+                                                                        viaje[
+                                                                            "idViaje"] = sitanciaFilter[
+                                                                                index]
+                                                                            .id;
+                                                                        TravelSharePreferences
+                                                                            travelSharePreferences =
+                                                                            TravelSharePreferences();
+                                                                        travelSharePreferences
+                                                                            .saveTravel(viaje);
                                                                         iniciarViaje =
                                                                             true;
                                                                       });

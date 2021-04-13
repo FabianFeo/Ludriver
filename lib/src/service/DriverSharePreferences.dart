@@ -21,3 +21,4 @@ class UserSharePreference {
     return json.decode(prefs.get('user'));
   }
 }
+
