@@ -42,6 +42,7 @@ class User {
   }
 
   fromMap(Map<String, dynamic> data) {
+    print(data);
     firstName = data['firstName'];
     lastname = data['lastname'];
     email = data['email'];

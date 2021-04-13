@@ -14,4 +14,10 @@ class UserSharePreference {
     User user = User();
     user.fromMap(json.decode(prefs.get('user')));
   }
+
+  Future<Map<String, dynamic>> getUser2() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    User user = User();
+    return json.decode(prefs.get('user'));
+  }
 }

@@ -6,6 +6,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as lo;
 import 'package:location/location.dart';
+import 'package:luconductora/src/service/DriverSharePreferences.dart';
+import 'package:luconductora/src/service/serviceAcceptService.dart';
 import 'package:luconductora/src/service/viajesService.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
@@ -24,12 +26,21 @@ class _MapaPageState extends State<MapaPage> {
   lo.Location _location = lo.Location();
   Timer timer;
   bool showCurrentPosition = true;
-  bool iniciarViaje = true;
+  bool iniciarViaje = false;
+  Map<String, dynamic> user = Map();
+  Map<String, dynamic> viaje = Map();
   LatLng startCoordinates;
   double kmFilter = 5;
   ViajesService viajesService = ViajesService();
   LatLng _initialcameraposition = LatLng(4.6097100, -74.0817500);
   GoogleMapController _controller;
+  @override
+  void initState() {
+    super.initState();
+    UserSharePreference userSharePreference = UserSharePreference();
+    userSharePreference.getUser2().then((value) => {user = value});
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -101,15 +112,25 @@ class _MapaPageState extends State<MapaPage> {
                                   if (snapshot.data != null &&
                                       snapshot.data.docs.length != 0) {
                                     List<QueryDocumentSnapshot> sitanciaFilter =
-                                        snapshot.data.docs.where((element) {
-                                      return calculateDistance(
-                                                  startCoordinates.latitude,
-                                                  startCoordinates.longitude,
-                                                  element.data()['latInicio'],
-                                                  element.data()['lanInicio']) /
-                                              1000 <=
-                                          kmFilter;
-                                    }).toList();
+                                        snapshot.data.docs
+                                            .where((element) {
+                                              return calculateDistance(
+                                                          startCoordinates
+                                                              .latitude,
+                                                          startCoordinates
+                                                              .longitude,
+                                                          element.data()[
+                                                              'latInicio'],
+                                                          element.data()[
+                                                              'lanInicio']) /
+                                                      1000 <=
+                                                  kmFilter;
+                                            })
+                                            .where((element) =>
+                                                element.data()['idDriver'] ==
+                                                null)
+                                            .where((element) => false)
+                                            .toList();
 
                                     // if ((timer == null || !timer.isActive) &&
                                     //     kmFilter < 5) {
@@ -126,8 +147,8 @@ class _MapaPageState extends State<MapaPage> {
                                     // }
 
                                     return TinderSwapCard(
-                                      swipeUp: true,
-                                      swipeDown: true,
+                                      swipeUp: false,
+                                      swipeDown: false,
                                       orientation: AmassOrientation.BOTTOM,
                                       totalNum: sitanciaFilter.length,
                                       stackNum: 3,
@@ -136,14 +157,14 @@ class _MapaPageState extends State<MapaPage> {
                                           MediaQuery.of(context).size.width *
                                               0.9,
                                       maxHeight:
-                                          MediaQuery.of(context).size.width *
-                                              1.2,
+                                          MediaQuery.of(context).size.height *
+                                              0.7,
                                       minWidth:
                                           MediaQuery.of(context).size.width *
                                               0.8,
                                       minHeight:
-                                          MediaQuery.of(context).size.width *
-                                              0.8,
+                                          MediaQuery.of(context).size.height *
+                                              0.6,
                                       cardBuilder: (context, index) => Card(
                                           child: FutureBuilder(
                                         future: firestore
@@ -416,7 +437,28 @@ class _MapaPageState extends State<MapaPage> {
                                                                             239,
                                                                             1)),
                                                                   ),
-                                                                  onTap: () {},
+                                                                  onTap: () {
+                                                                    print(snapshot2
+                                                                        .data
+                                                                        .data());
+                                                                    AcceptService
+                                                                        acceptService =
+                                                                        AcceptService();
+                                                                    acceptService
+                                                                        .acceptService(sitanciaFilter[index]
+                                                                            .id)
+                                                                        .then(
+                                                                            (value) {
+                                                                      setState(
+                                                                          () {
+                                                                        viaje = snapshot2
+                                                                            .data
+                                                                            .data();
+                                                                        iniciarViaje =
+                                                                            true;
+                                                                      });
+                                                                    });
+                                                                  },
                                                                 )),
                                                           ],
                                                         ),
