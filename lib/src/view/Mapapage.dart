@@ -8,6 +8,7 @@ import 'package:location/location.dart' as lo;
 import 'package:location/location.dart';
 import 'package:luconductora/src/service/DriverSharePreferences.dart';
 import 'package:luconductora/src/service/serviceAcceptService.dart';
+import 'package:luconductora/src/service/viajeActivoSharePreference.dart';
 import 'package:luconductora/src/service/viajesService.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
@@ -30,18 +31,30 @@ class _MapaPageState extends State<MapaPage> {
   Map<String, dynamic> user = Map();
   Map<String, dynamic> viaje = Map();
   LatLng startCoordinates;
+  UserSharePreference userSharePreference = UserSharePreference();
+  ViajeActivoSharePreference viajeActivoSharePreference =
+      ViajeActivoSharePreference();
   double kmFilter = 5;
+  CardController controller;
   ViajesService viajesService = ViajesService();
   LatLng _initialcameraposition = LatLng(4.6097100, -74.0817500);
   GoogleMapController _controller;
   @override
   void initState() {
     super.initState();
-    UserSharePreference userSharePreference = UserSharePreference();
+
     userSharePreference.getUser2().then((value) {
       setState(() {
         user = value;
       });
+    });
+    viajeActivoSharePreference.getVieaje().then((value) {
+      if (value != null && value['estado'] != 'Terminado') {
+        viaje = value;
+        setState(() {
+          iniciarViaje = true;
+        });
+      }
     });
   }
 
@@ -50,7 +63,6 @@ class _MapaPageState extends State<MapaPage> {
     print(user);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    CardController controller;
     return FutureBuilder(
       future: _location.getLocation(),
       builder: (_, AsyncSnapshot<LocationData> location) {
@@ -71,7 +83,6 @@ class _MapaPageState extends State<MapaPage> {
                           myLocationButtonEnabled: true,
                           buildingsEnabled: false,
                           zoomControlsEnabled: false,
-
                           initialCameraPosition: CameraPosition(
                               target: _initialcameraposition, zoom: 15),
                           mapType: MapType.normal,
@@ -611,6 +622,11 @@ class _MapaPageState extends State<MapaPage> {
                                                                         viaje = snapshot2
                                                                             .data
                                                                             .data();
+                                                                        viaje.addAll(
+                                                                            sitanciaFilter[index].data());
+
+                                                                        viajeActivoSharePreference
+                                                                            .saveVieaje(viaje);
                                                                         iniciarViaje =
                                                                             true;
                                                                       });
