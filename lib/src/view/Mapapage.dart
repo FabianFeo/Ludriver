@@ -38,11 +38,16 @@ class _MapaPageState extends State<MapaPage> {
   void initState() {
     super.initState();
     UserSharePreference userSharePreference = UserSharePreference();
-    userSharePreference.getUser2().then((value) => {user = value});
+    userSharePreference.getUser2().then((value) {
+      setState(() {
+        user = value;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    print(user);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     CardController controller;
@@ -129,7 +134,9 @@ class _MapaPageState extends State<MapaPage> {
                                             .where((element) =>
                                                 element.data()['idDriver'] ==
                                                 null)
-                                            .where((element) => false)
+                                            .where((element) =>
+                                                element.data()['idCliente'] !=
+                                                user['userUuid'])
                                             .toList();
 
                                     // if ((timer == null || !timer.isActive) &&
