@@ -8,7 +8,6 @@ import 'package:location/location.dart' as lo;
 import 'package:location/location.dart';
 import 'package:luconductora/src/service/DriverSharePreferences.dart';
 import 'package:luconductora/src/service/serviceAcceptService.dart';
-import 'package:luconductora/src/service/DriverTravelPreference.dart';
 import 'package:luconductora/src/service/viajesService.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
@@ -82,9 +81,159 @@ class _MapaPageState extends State<MapaPage> {
                       ),
                     ),
                     iniciarViaje
-                        ? Center(
-                            child: Container(
-                              margin: EdgeInsets.only(top: height / 1.3),
+                        ? Container(
+                            child: Column(children: [
+                            Container(
+                              margin: EdgeInsets.only(top: height / 4),
+                              child: Center(
+                                child: Container(
+                                  height: height / 1.8,
+                                  width: width / 1.15,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                    color: Color.fromRGBO(207, 197, 239, 1),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        margin:
+                                            EdgeInsets.only(top: height / 40),
+                                        child: Text(
+                                          'Viaje Aceptado',
+                                          style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  102, 51, 204, 1),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: height / 35),
+                                        ),
+                                      ),
+                                      Container(
+                                          margin:
+                                              EdgeInsets.only(top: height / 50),
+                                          height: height / 7,
+                                          child: CircleAvatar(
+                                            radius: 60,
+                                            backgroundImage:
+                                                AssetImage('Conductora.png'),
+                                          )),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                top: height / 50),
+                                            child: Text(
+                                              'firstName',
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    102, 51, 204, 1),
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                top: height / 50),
+                                            child: Text(
+                                              'lastname',
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    102, 51, 204, 1),
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        margin:
+                                            EdgeInsets.only(top: height / 50),
+                                        child: Text(
+                                          'Punto de encuentro',
+                                          style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  102, 51, 204, 1),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: height / 50),
+                                        ),
+                                      ),
+                                      Container(
+                                        margin:
+                                            EdgeInsets.only(top: height / 50),
+                                        child: Container(
+                                          height: height / 15,
+                                          width: width / 1.5,
+                                          child: Text(
+                                            'direccionInicio',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  102, 51, 204, 1),
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          'Punto de destino',
+                                          style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  102, 51, 204, 1),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: height / 50),
+                                        ),
+                                      ),
+                                      Container(
+                                        margin:
+                                            EdgeInsets.only(top: height / 50),
+                                        child: Container(
+                                          width: width / 1.5,
+                                          child: Text(
+                                            'direccionDestino',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  102, 51, 204, 1),
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          'Valor del viaje',
+                                          style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  102, 51, 204, 1),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: height / 50),
+                                        ),
+                                      ),
+                                      Container(
+                                        margin:
+                                            EdgeInsets.only(top: height / 50),
+                                        child: Container(
+                                          width: width / 1.5,
+                                          child: Text(
+                                            'Valortotal',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  102, 51, 204, 1),
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
                               child: BouncingWidget(
                                   duration: Duration(milliseconds: 100),
                                   scaleFactor: 1.5,
@@ -109,7 +258,7 @@ class _MapaPageState extends State<MapaPage> {
                                     ),
                                   )),
                             ),
-                          )
+                          ]))
                         : Center(
                             child: StreamBuilder(
                                 stream: viajesService.getViajes(),
@@ -459,17 +608,9 @@ class _MapaPageState extends State<MapaPage> {
                                                                             (value) {
                                                                       setState(
                                                                           () {
-                                                                        viaje =
-                                                                            sitanciaFilter[index].data();
-                                                                        viaje[
-                                                                            "idViaje"] = sitanciaFilter[
-                                                                                index]
-                                                                            .id;
-                                                                        TravelSharePreferences
-                                                                            travelSharePreferences =
-                                                                            TravelSharePreferences();
-                                                                        travelSharePreferences
-                                                                            .saveTravel(viaje);
+                                                                        viaje = snapshot2
+                                                                            .data
+                                                                            .data();
                                                                         iniciarViaje =
                                                                             true;
                                                                       });
