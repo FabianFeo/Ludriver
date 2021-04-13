@@ -93,9 +93,9 @@ class _MapaPageState extends State<MapaPage> {
                     ),
                     iniciarViaje
                         ? Container(
-                            child: Column(children: [
+                            child: Column(children: [                              
                             Container(
-                              margin: EdgeInsets.only(top: height / 4),
+                              margin: EdgeInsets.only(top: height / 2.6),
                               child: Center(
                                 child: Container(
                                   height: height / 1.8,
@@ -108,8 +108,11 @@ class _MapaPageState extends State<MapaPage> {
                                   child: Column(
                                     children: [
                                       Container(
+                                child: Icon(Icons.expand_more_outlined),
+                              ),
+                                      Container(
                                         margin:
-                                            EdgeInsets.only(top: height / 40),
+                                            EdgeInsets.only(top: height / 80),
                                         child: Text(
                                           'Viaje Aceptado',
                                           style: TextStyle(
@@ -244,31 +247,7 @@ class _MapaPageState extends State<MapaPage> {
                                 ),
                               ),
                             ),
-                            Container(
-                              child: BouncingWidget(
-                                  duration: Duration(milliseconds: 100),
-                                  scaleFactor: 1.5,
-                                  onPressed: () {},
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(50.0),
-                                    ),
-                                    color: Color.fromRGBO(101, 79, 168, 1),
-                                    child: Container(
-                                      width: width / 1.5,
-                                      height: height / 20,
-                                      child: Text(
-                                        "Iniciar viaje",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: Color.fromRGBO(
-                                                255, 255, 255, 1),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 25),
-                                      ),
-                                    ),
-                                  )),
-                            ),
+                            
                           ]))
                         : Center(
                             child: StreamBuilder(
