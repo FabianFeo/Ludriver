@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as lo;
@@ -22,6 +23,7 @@ class MapaPage extends StatefulWidget {
 
 class _MapaPageState extends State<MapaPage> {
   double height = 0;
+  PolylinePoints polylinePoints;
   double width = 0;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   lo.Location _location = lo.Location();
@@ -29,8 +31,10 @@ class _MapaPageState extends State<MapaPage> {
   bool showCurrentPosition = true;
   bool iniciarViaje = false;
   Map<String, dynamic> user = Map();
+  List<LatLng> polylineCoordinates = [];
   Map<String, dynamic> viaje = Map();
   LatLng startCoordinates;
+   Set<Polyline> polylines = Set();
   UserSharePreference userSharePreference = UserSharePreference();
   ViajeActivoSharePreference viajeActivoSharePreference =
       ViajeActivoSharePreference();
@@ -54,13 +58,13 @@ class _MapaPageState extends State<MapaPage> {
         setState(() {
           iniciarViaje = true;
         });
+        getUbicationStream();
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    print(user);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return FutureBuilder(
@@ -83,6 +87,7 @@ class _MapaPageState extends State<MapaPage> {
                           myLocationButtonEnabled: true,
                           buildingsEnabled: false,
                           zoomControlsEnabled: false,
+                          polylines: polylines,
                           initialCameraPosition: CameraPosition(
                               target: _initialcameraposition, zoom: 15),
                           mapType: MapType.normal,
@@ -91,9 +96,9 @@ class _MapaPageState extends State<MapaPage> {
                         ),
                       ),
                     ),
-                    iniciarViaje
+                    iniciarViaje && viaje != null
                         ? Container(
-                            child: Column(children: [                              
+                            child: Column(children: [
                             Container(
                               margin: EdgeInsets.only(top: height / 2.6),
                               child: Center(
@@ -108,8 +113,16 @@ class _MapaPageState extends State<MapaPage> {
                                   child: Column(
                                     children: [
                                       Container(
-                                child: Icon(Icons.expand_more_outlined),
-                              ),
+                                        child: GestureDetector(
+                                          child:
+                                              Icon(Icons.expand_more_outlined),
+                                          onTap: () {
+                                            setState(() {
+                                              iniciarViaje = false;
+                                            });
+                                          },
+                                        ),
+                                      ),
                                       Container(
                                         margin:
                                             EdgeInsets.only(top: height / 80),
@@ -247,137 +260,98 @@ class _MapaPageState extends State<MapaPage> {
                                 ),
                               ),
                             ),
-                            
                           ]))
-                        : Center(
-                            child: StreamBuilder(
-                                stream: viajesService.getViajes(),
-                                builder:
-                                    (_, AsyncSnapshot<QuerySnapshot> snapshot) {
-                                  if (snapshot.data != null &&
-                                      snapshot.data.docs.length != 0) {
-                                    List<QueryDocumentSnapshot> sitanciaFilter =
-                                        snapshot.data.docs
-                                            .where((element) {
-                                              return calculateDistance(
-                                                          startCoordinates
-                                                              .latitude,
-                                                          startCoordinates
-                                                              .longitude,
-                                                          element.data()[
-                                                              'latInicio'],
-                                                          element.data()[
-                                                              'lanInicio']) /
-                                                      1000 <=
-                                                  kmFilter;
-                                            })
-                                            .where((element) =>
-                                                element.data()['idDriver'] ==
-                                                null)
-                                            .where((element) =>
-                                                element.data()['idCliente'] !=
-                                                user['userUuid'])
-                                            .toList();
+                        : viaje == null
+                            ? Center(
+                                child: StreamBuilder(
+                                    stream: viajesService.getViajes(),
+                                    builder: (_,
+                                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                                      if (snapshot.data != null &&
+                                          snapshot.data.docs.length != 0) {
+                                        List<QueryDocumentSnapshot>
+                                            sitanciaFilter = snapshot.data.docs
+                                                .where((element) {
+                                                  return calculateDistance(
+                                                              startCoordinates
+                                                                  .latitude,
+                                                              startCoordinates
+                                                                  .longitude,
+                                                              element.data()[
+                                                                  'latInicio'],
+                                                              element.data()[
+                                                                  'lanInicio']) /
+                                                          1000 <=
+                                                      kmFilter;
+                                                })
+                                                .where((element) =>
+                                                    element
+                                                        .data()['idDriver'] ==
+                                                    null)
+                                                .where((element) =>
+                                                    element
+                                                        .data()['idCliente'] !=
+                                                    user['userUuid'])
+                                                .toList();
 
-                                    // if ((timer == null || !timer.isActive) &&
-                                    //     kmFilter < 5) {
-                                    //   Timer.periodic(Duration(seconds: 5),
-                                    //       (iterasion) {
-                                    //     setState(() {
-                                    //       timer = iterasion;
-                                    //       kmFilter += 1;
-                                    //     });
-                                    //     if (kmFilter >= 5) {
-                                    //       iterasion.cancel();
-                                    //     }
-                                    //   });
-                                    // }
+                                        // if ((timer == null || !timer.isActive) &&
+                                        //     kmFilter < 5) {
+                                        //   Timer.periodic(Duration(seconds: 5),
+                                        //       (iterasion) {
+                                        //     setState(() {
+                                        //       timer = iterasion;
+                                        //       kmFilter += 1;
+                                        //     });
+                                        //     if (kmFilter >= 5) {
+                                        //       iterasion.cancel();
+                                        //     }
+                                        //   });
+                                        // }
 
-                                    return TinderSwapCard(
-                                      swipeUp: false,
-                                      swipeDown: false,
-                                      orientation: AmassOrientation.BOTTOM,
-                                      totalNum: sitanciaFilter.length,
-                                      stackNum: 3,
-                                      swipeEdge: 4.0,
-                                      maxWidth:
-                                          MediaQuery.of(context).size.width *
+                                        return TinderSwapCard(
+                                          swipeUp: false,
+                                          swipeDown: false,
+                                          orientation: AmassOrientation.BOTTOM,
+                                          totalNum: sitanciaFilter.length,
+                                          stackNum: 3,
+                                          swipeEdge: 4.0,
+                                          maxWidth: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
                                               0.9,
-                                      maxHeight:
-                                          MediaQuery.of(context).size.height *
+                                          maxHeight: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
                                               0.7,
-                                      minWidth:
-                                          MediaQuery.of(context).size.width *
+                                          minWidth: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
                                               0.8,
-                                      minHeight:
-                                          MediaQuery.of(context).size.height *
+                                          minHeight: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
                                               0.6,
-                                      cardBuilder: (context, index) => Card(
-                                          child: FutureBuilder(
-                                        future: firestore
-                                            .collection('users')
-                                            .doc(sitanciaFilter[index]
-                                                .data()['idCliente'])
-                                            .get(),
-                                        builder: (_,
-                                            AsyncSnapshot<DocumentSnapshot>
-                                                snapshot2) {
-                                          return snapshot2.hasData
-                                              ? Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                15)),
-                                                    color: Color.fromRGBO(
-                                                        207, 197, 239, 1),
-                                                  ),
-                                                  child: Column(
-                                                    children: [
-                                                      Container(
-                                                        margin: EdgeInsets.only(
-                                                            top: height / 50),
-                                                        child: Text(
-                                                          'Viaje disponible',
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      102,
-                                                                      51,
-                                                                      204,
-                                                                      1),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize:
-                                                                  height / 35),
-                                                        ),
+                                          cardBuilder: (context, index) => Card(
+                                              child: FutureBuilder(
+                                            future: firestore
+                                                .collection('users')
+                                                .doc(sitanciaFilter[index]
+                                                    .data()['idCliente'])
+                                                .get(),
+                                            builder: (_,
+                                                AsyncSnapshot<DocumentSnapshot>
+                                                    snapshot2) {
+                                              return snapshot2.hasData
+                                                  ? Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    15)),
+                                                        color: Color.fromRGBO(
+                                                            207, 197, 239, 1),
                                                       ),
-                                                      Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  top: height /
-                                                                      50),
-                                                          height: height / 7,
-                                                          child: CircleAvatar(
-                                                            radius: 60,
-                                                            backgroundImage: snapshot2
-                                                                            .data
-                                                                            .data()[
-                                                                        'profileImage'] ==
-                                                                    null
-                                                                ? AssetImage(
-                                                                    'Conductora.png')
-                                                                : NetworkImage(
-                                                                    snapshot2
-                                                                            .data
-                                                                            .data()[
-                                                                        'profileImage']),
-                                                          )),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
+                                                      child: Column(
                                                         children: [
                                                           Container(
                                                             margin:
@@ -386,23 +360,98 @@ class _MapaPageState extends State<MapaPage> {
                                                                         height /
                                                                             50),
                                                             child: Text(
-                                                              snapshot2.data
-                                                                      .data()[
-                                                                          'firstName']
-                                                                      .toString() +
-                                                                  '',
+                                                              'Viaje disponible',
                                                               style: TextStyle(
-                                                                color: Color
-                                                                    .fromRGBO(
-                                                                        102,
-                                                                        51,
-                                                                        204,
-                                                                        1),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
-                                                              ),
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          102,
+                                                                          51,
+                                                                          204,
+                                                                          1),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize:
+                                                                      height /
+                                                                          35),
                                                             ),
+                                                          ),
+                                                          Container(
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      top: height /
+                                                                          50),
+                                                              height:
+                                                                  height / 7,
+                                                              child:
+                                                                  CircleAvatar(
+                                                                radius: 60,
+                                                                backgroundImage: snapshot2.data.data()[
+                                                                            'profileImage'] ==
+                                                                        null
+                                                                    ? AssetImage(
+                                                                        'Conductora.png')
+                                                                    : NetworkImage(
+                                                                        snapshot2
+                                                                            .data
+                                                                            .data()['profileImage']),
+                                                              )),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        top: height /
+                                                                            50),
+                                                                child: Text(
+                                                                  snapshot2.data
+                                                                          .data()[
+                                                                              'firstName']
+                                                                          .toString() +
+                                                                      '',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Color
+                                                                        .fromRGBO(
+                                                                            102,
+                                                                            51,
+                                                                            204,
+                                                                            1),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        top: height /
+                                                                            50),
+                                                                child: Text(
+                                                                  snapshot2.data
+                                                                          .data()[
+                                                                              'lastname']
+                                                                          .toString() +
+                                                                      '',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Color
+                                                                        .fromRGBO(
+                                                                            102,
+                                                                            51,
+                                                                            204,
+                                                                            1),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
                                                           Container(
                                                             margin:
@@ -411,245 +460,256 @@ class _MapaPageState extends State<MapaPage> {
                                                                         height /
                                                                             50),
                                                             child: Text(
-                                                              snapshot2.data
-                                                                      .data()[
-                                                                          'lastname']
-                                                                      .toString() +
-                                                                  '',
+                                                              'Punto de encuentro',
                                                               style: TextStyle(
-                                                                color: Color
-                                                                    .fromRGBO(
-                                                                        102,
-                                                                        51,
-                                                                        204,
-                                                                        1),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          102,
+                                                                          51,
+                                                                          204,
+                                                                          1),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize:
+                                                                      height /
+                                                                          50),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    top:
+                                                                        height /
+                                                                            50),
+                                                            child: Container(
+                                                              height:
+                                                                  height / 15,
+                                                              width:
+                                                                  width / 1.5,
+                                                              child: Text(
+                                                                sitanciaFilter[
+                                                                        index]
+                                                                    .data()[
+                                                                        'direccionInicio']
+                                                                    .toString(),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          102,
+                                                                          51,
+                                                                          204,
+                                                                          1),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
+                                                          Container(
+                                                            child: Text(
+                                                              'Punto de destino',
+                                                              style: TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          102,
+                                                                          51,
+                                                                          204,
+                                                                          1),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize:
+                                                                      height /
+                                                                          50),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    top:
+                                                                        height /
+                                                                            50),
+                                                            child: Container(
+                                                              width:
+                                                                  width / 1.5,
+                                                              child: Text(
+                                                                sitanciaFilter[
+                                                                        index]
+                                                                    .data()[
+                                                                        'direccionDestino']
+                                                                    .toString(),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          102,
+                                                                          51,
+                                                                          204,
+                                                                          1),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceEvenly,
+                                                              children: [
+                                                                Container(
+                                                                    margin: EdgeInsets.only(
+                                                                        top: height /
+                                                                            50),
+                                                                    child:
+                                                                        GestureDetector(
+                                                                      child:
+                                                                          CircleAvatar(
+                                                                        backgroundColor: Color.fromRGBO(
+                                                                            102,
+                                                                            51,
+                                                                            204,
+                                                                            1),
+                                                                        radius:
+                                                                            height /
+                                                                                28,
+                                                                        child: Icon(
+                                                                            Icons
+                                                                                .highlight_off,
+                                                                            color: Color.fromRGBO(
+                                                                                207,
+                                                                                197,
+                                                                                239,
+                                                                                1)),
+                                                                      ),
+                                                                      onTap:
+                                                                          () {},
+                                                                    )),
+                                                                Container(
+                                                                    margin: EdgeInsets.only(
+                                                                        top: height /
+                                                                            50),
+                                                                    child:
+                                                                        GestureDetector(
+                                                                      child:
+                                                                          CircleAvatar(
+                                                                        backgroundColor: Color.fromRGBO(
+                                                                            102,
+                                                                            51,
+                                                                            204,
+                                                                            1),
+                                                                        radius:
+                                                                            height /
+                                                                                28,
+                                                                        child: Icon(
+                                                                            Icons
+                                                                                .check_circle_outline,
+                                                                            color: Color.fromRGBO(
+                                                                                207,
+                                                                                197,
+                                                                                239,
+                                                                                1)),
+                                                                      ),
+                                                                      onTap:
+                                                                          () {
+                                                                        print(snapshot2
+                                                                            .data
+                                                                            .data());
+                                                                        AcceptService
+                                                                            acceptService =
+                                                                            AcceptService();
+                                                                        acceptService
+                                                                            .acceptService(sitanciaFilter[index].id)
+                                                                            .then((value) {
+                                                                          setState(
+                                                                              () {
+                                                                            viaje =
+                                                                                snapshot2.data.data();
+                                                                            viaje.addAll(sitanciaFilter[index].data());
+
+                                                                            viajeActivoSharePreference.saveVieaje(viaje);
+                                                                            iniciarViaje =
+                                                                                true;
+                                                                          });
+                                                                          getUbicationStream();
+                                                                        });
+                                                                      },
+                                                                    )),
+                                                              ],
+                                                            ),
+                                                          )
                                                         ],
                                                       ),
-                                                      Container(
-                                                        margin: EdgeInsets.only(
-                                                            top: height / 50),
-                                                        child: Text(
-                                                          'Punto de encuentro',
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      102,
-                                                                      51,
-                                                                      204,
-                                                                      1),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize:
-                                                                  height / 50),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        margin: EdgeInsets.only(
-                                                            top: height / 50),
-                                                        child: Container(
-                                                          height: height / 15,
-                                                          width: width / 1.5,
-                                                          child: Text(
-                                                            sitanciaFilter[
-                                                                    index]
-                                                                .data()[
-                                                                    'direccionInicio']
-                                                                .toString(),
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      102,
-                                                                      51,
-                                                                      204,
-                                                                      1),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        child: Text(
-                                                          'Punto de destino',
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      102,
-                                                                      51,
-                                                                      204,
-                                                                      1),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize:
-                                                                  height / 50),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        margin: EdgeInsets.only(
-                                                            top: height / 50),
-                                                        child: Container(
-                                                          width: width / 1.5,
-                                                          child: Text(
-                                                            sitanciaFilter[
-                                                                    index]
-                                                                .data()[
-                                                                    'direccionDestino']
-                                                                .toString(),
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      102,
-                                                                      51,
-                                                                      204,
-                                                                      1),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          children: [
-                                                            Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        top: height /
-                                                                            50),
-                                                                child:
-                                                                    GestureDetector(
-                                                                  child:
-                                                                      CircleAvatar(
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            102,
-                                                                            51,
-                                                                            204,
-                                                                            1),
-                                                                    radius:
-                                                                        height /
-                                                                            28,
-                                                                    child: Icon(
-                                                                        Icons
-                                                                            .highlight_off,
-                                                                        color: Color.fromRGBO(
-                                                                            207,
-                                                                            197,
-                                                                            239,
-                                                                            1)),
-                                                                  ),
-                                                                  onTap: () {},
-                                                                )),
-                                                            Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        top: height /
-                                                                            50),
-                                                                child:
-                                                                    GestureDetector(
-                                                                  child:
-                                                                      CircleAvatar(
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            102,
-                                                                            51,
-                                                                            204,
-                                                                            1),
-                                                                    radius:
-                                                                        height /
-                                                                            28,
-                                                                    child: Icon(
-                                                                        Icons
-                                                                            .check_circle_outline,
-                                                                        color: Color.fromRGBO(
-                                                                            207,
-                                                                            197,
-                                                                            239,
-                                                                            1)),
-                                                                  ),
-                                                                  onTap: () {
-                                                                    print(snapshot2
-                                                                        .data
-                                                                        .data());
-                                                                    AcceptService
-                                                                        acceptService =
-                                                                        AcceptService();
-                                                                    acceptService
-                                                                        .acceptService(sitanciaFilter[index]
-                                                                            .id)
-                                                                        .then(
-                                                                            (value) {
-                                                                      setState(
-                                                                          () {
-                                                                        viaje = snapshot2
-                                                                            .data
-                                                                            .data();
-                                                                        viaje.addAll(
-                                                                            sitanciaFilter[index].data());
-
-                                                                        viajeActivoSharePreference
-                                                                            .saveVieaje(viaje);
-                                                                        iniciarViaje =
-                                                                            true;
-                                                                      });
-                                                                    });
-                                                                  },
-                                                                )),
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                )
-                                              : Container(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                );
-                                        },
-                                      ) // Card(
-                                          //     child: Text(snapshot.data.docs[index]
-                                          //         .data()['direccionInicio']
-                                          //         .toString())),
-                                          ),
-                                      cardController: controller =
-                                          CardController(),
-                                      swipeUpdateCallback:
-                                          (DragUpdateDetails details,
-                                              Alignment align) {
-                                        /// Get swiping card's alignment
-                                        if (align.x < 0) {
-                                          //Card is LEFT swiping
-                                        } else if (align.x > 0) {
-                                          //Card is RIGHT swiping
-                                        }
-                                      },
-                                      swipeCompleteCallback:
-                                          (CardSwipeOrientation orientation,
-                                              int index) {
-                                        /// Get orientation & index of swiped card!
-                                      },
-                                    );
-                                  } else {
-                                    return Container();
-                                  }
-                                }))
+                                                    )
+                                                  : Container(
+                                                      child:
+                                                          CircularProgressIndicator(),
+                                                    );
+                                            },
+                                          ) // Card(
+                                              //     child: Text(snapshot.data.docs[index]
+                                              //         .data()['direccionInicio']
+                                              //         .toString())),
+                                              ),
+                                          cardController: controller =
+                                              CardController(),
+                                          swipeUpdateCallback:
+                                              (DragUpdateDetails details,
+                                                  Alignment align) {
+                                            /// Get swiping card's alignment
+                                            if (align.x < 0) {
+                                              //Card is LEFT swiping
+                                            } else if (align.x > 0) {
+                                              //Card is RIGHT swiping
+                                            }
+                                          },
+                                          swipeCompleteCallback:
+                                              (CardSwipeOrientation orientation,
+                                                  int index) {
+                                            /// Get orientation & index of swiped card!
+                                          },
+                                        );
+                                      } else {
+                                        return Container();
+                                      }
+                                    }))
+                            : Container(
+                                child: Column(children: [
+                                Container(
+                                    margin: EdgeInsets.only(top: height / 1.3),
+                                    child: Center(
+                                        child: Container(
+                                      height: height / 9,
+                                      width: width / 1.15,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15)),
+                                        color: Color.fromRGBO(207, 197, 239, 1),
+                                      ),
+                                      child: Container(
+                                        child: GestureDetector(
+                                          child:
+                                              Icon(Icons.expand_less_outlined),
+                                          onTap: () {
+                                            setState(() {
+                                              iniciarViaje = true;
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                    )))
+                              ]))
                   ],
                 ),
               ),
@@ -679,7 +739,54 @@ class _MapaPageState extends State<MapaPage> {
       }
     });
   }
+
+  getUbicationStream() {
+    Geolocator.getPositionStream().listen((event) {
+      _createPolylines(LatLng(event.latitude, event.longitude),
+          LatLng(viaje['latInicio'], viaje['lanInicio']));
+    });
+  }
+
+  _createPolylines(LatLng location, LatLng destino) async {
+    // Initializing PolylinePoints
+    polylinePoints = PolylinePoints();
+
+    // Generating the list of coordinates to be used for
+    // drawing the polylines
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      'AIzaSyDDjt2cJQi5BgxkYJZ7ZtrPTafZQICenXo', // Google Maps API Key
+      PointLatLng(location.latitude, location.longitude),
+      PointLatLng(destino.latitude, destino.longitude),
+      travelMode: TravelMode.driving,
+      optimizeWaypoints: true,
+    );
+
+    // Adding the coordinates to the list
+    if (result.points.isNotEmpty) {
+      result.points.forEach((PointLatLng point) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      });
+    }
+
+    // Defining an ID
+    PolylineId id = PolylineId('poly');
+
+    // Initializing Polyline
+    Polyline polyline = Polyline(
+      polylineId: id,
+      color: Color.fromRGBO(101, 79, 168, 1),
+      points: polylineCoordinates,
+      width: 3,
+    );
+ 
+    // Adding the polyline to the map
+    polylines.clear();
+    setState(() {
+      polylines.add(polyline);
+    });
+  }
 }
+
 
 /*
 : Container(),
