@@ -98,12 +98,14 @@ class _MapaPageState extends State<MapaPage> {
                     ),
                     iniciarViaje && viaje != null
                         ? Container(
-                            child: Column(children: [
+                            child:SingleChildScrollView(
+                              child:
+                             Column(children: [
                             Container(
                               margin: EdgeInsets.only(top: height / 2.6),
                               child: Center(
                                 child: Container(
-                                  height: height / 1.8,
+                                  height: height / 1.6,
                                   width: width / 1.15,
                                   decoration: BoxDecoration(
                                     borderRadius:
@@ -255,12 +257,43 @@ class _MapaPageState extends State<MapaPage> {
                                           ),
                                         ),
                                       ),
-                                    ],
+                                       Container(
+                              child: Container(
+                              child: BouncingWidget(
+                                duration: Duration(milliseconds: 100),
+                                scaleFactor: 1.5,
+                                onPressed: () {
+                                },
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                  ),
+                                  color: Color.fromRGBO(101, 79, 168, 1),
+                                  child: Container(
+                                    width: width / 2,
+                                    height: height / 20,
+                                    child: Text(
+                                      "Cancelar viaje",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 30),
+                                    ),
                                   ),
                                 ),
                               ),
+                            )),
+                                    ],
+                                  ),
+                                ),
+                                
+                              ),
                             ),
-                          ]))
+                           
+
+                          ])))
                         : viaje == null
                             ? Center(
                                 child: StreamBuilder(
