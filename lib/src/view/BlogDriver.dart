@@ -35,7 +35,7 @@ class _BlogDriverState extends State<BlogDriver> {
                       ),
                     ),
                   ),
-                  Container(                    
+                  Container(
                     child: Card(
                       color: Color.fromRGBO(101, 79, 168, 1),
                       shape: RoundedRectangleBorder(
@@ -55,7 +55,7 @@ class _BlogDriverState extends State<BlogDriver> {
                                         top: height / 40, left: width / 19),
                                     width: width / 1.5,
                                     child: Container(
-                                      child: CircleAvatar(                                        
+                                      child: CircleAvatar(
                                           backgroundColor: Colors.white,
                                           radius: height / 20,
                                           backgroundImage: AssetImage(
@@ -112,15 +112,16 @@ class _BlogDriverState extends State<BlogDriver> {
                             Container(
                               width: width / 1.179,
                               child: Center(
-                                child: Text('Publicidad',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: height / 20,
-                                color: Colors.white,
-                              ),),
+                                child: Text(
+                                  'Publicidad',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: height / 25,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
                             ),
-                            
                           ],
                         ),
                       ),
