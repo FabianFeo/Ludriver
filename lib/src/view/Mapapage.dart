@@ -13,6 +13,7 @@ import 'package:luconductora/src/service/viajeActivoSharePreference.dart';
 import 'package:luconductora/src/service/viajesService.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
+import 'package:loading_gifs/loading_gifs.dart';
 
 class MapaPage extends StatefulWidget {
   MapaPage({Key key}) : super(key: key);
@@ -32,9 +33,9 @@ class _MapaPageState extends State<MapaPage> {
   bool iniciarViaje = false;
   Map<String, dynamic> user = Map();
   List<LatLng> polylineCoordinates = [];
-  Map<String, dynamic> viaje ;
+  Map<String, dynamic> viaje;
   LatLng startCoordinates;
-   Set<Polyline> polylines = Set();
+  Set<Polyline> polylines = Set();
   UserSharePreference userSharePreference = UserSharePreference();
   ViajeActivoSharePreference viajeActivoSharePreference =
       ViajeActivoSharePreference();
@@ -98,9 +99,8 @@ class _MapaPageState extends State<MapaPage> {
                     ),
                     iniciarViaje && viaje != null
                         ? Container(
-                            child:SingleChildScrollView(
-                              child:
-                             Column(children: [
+                            child: SingleChildScrollView(
+                                child: Column(children: [
                             Container(
                               margin: EdgeInsets.only(top: height / 2.6),
                               child: Center(
@@ -257,42 +257,40 @@ class _MapaPageState extends State<MapaPage> {
                                           ),
                                         ),
                                       ),
-                                       Container(
-                              child: Container(
-                              child: BouncingWidget(
-                                duration: Duration(milliseconds: 100),
-                                scaleFactor: 1.5,
-                                onPressed: () {
-                                },
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                  ),
-                                  color: Color.fromRGBO(101, 79, 168, 1),
-                                  child: Container(
-                                    width: width / 2,
-                                    height: height / 20,
-                                    child: Text(
-                                      "Cancelar viaje",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 255, 255, 1),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 30),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )),
+                                      Container(
+                                          child: Container(
+                                        child: BouncingWidget(
+                                          duration: Duration(milliseconds: 100),
+                                          scaleFactor: 1.5,
+                                          onPressed: () {},
+                                          child: Card(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(50.0),
+                                            ),
+                                            color:
+                                                Color.fromRGBO(101, 79, 168, 1),
+                                            child: Container(
+                                              width: width / 2,
+                                              height: height / 20,
+                                              child: Text(
+                                                "Cancelar viaje",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Color.fromRGBO(
+                                                        255, 255, 255, 1),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 30),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )),
                                     ],
                                   ),
                                 ),
-                                
                               ),
                             ),
-                           
-
                           ])))
                         : viaje == null
                             ? Center(
@@ -687,7 +685,7 @@ class _MapaPageState extends State<MapaPage> {
                                                     )
                                                   : Container(
                                                       child:
-                                                          CircularProgressIndicator(),
+                                                          LinearProgressIndicator(),
                                                     );
                                             },
                                           ) // Card(
@@ -749,7 +747,11 @@ class _MapaPageState extends State<MapaPage> {
             ),
           );
         } else {
-          return CircularProgressIndicator();
+          return FadeInImage.assetNetwork(
+            placeholder: 'assets/Logo/Lu_carga_transparente.gif',
+            image: "",
+            //alignment: Alignment.center,
+          );
         }
       },
     );
@@ -811,7 +813,7 @@ class _MapaPageState extends State<MapaPage> {
       points: polylineCoordinates,
       width: 3,
     );
- 
+
     // Adding the polyline to the map
     polylines.clear();
     setState(() {
@@ -819,7 +821,6 @@ class _MapaPageState extends State<MapaPage> {
     });
   }
 }
-
 
 /*
 : Container(),

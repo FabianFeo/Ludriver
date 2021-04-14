@@ -49,6 +49,7 @@ dependencies:
   uuid: 3.0.2
   image_picker: ^0.7.3
   flutter_tindercard: ^0.2.0
+  loading_gifs: ^0.3.0
 
 
 
