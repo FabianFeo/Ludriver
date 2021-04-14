@@ -18,4 +18,11 @@ class AcceptService {
       'estado': 'Acceptado'
     });
   }
+
+  Future cancelarService(String uiidViaje) async {
+    return firestore
+        .collection('viajes')
+        .doc(uiidViaje)
+        .update({'estado': 'Cancelado'});
+  }
 }

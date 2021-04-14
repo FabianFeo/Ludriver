@@ -39,6 +39,7 @@ class _MapaPageState extends State<MapaPage> {
   UserSharePreference userSharePreference = UserSharePreference();
   ViajeActivoSharePreference viajeActivoSharePreference =
       ViajeActivoSharePreference();
+  AcceptService acceptService = AcceptService();
   double kmFilter = 5;
   CardController controller;
   ViajesService viajesService = ViajesService();
@@ -54,7 +55,8 @@ class _MapaPageState extends State<MapaPage> {
       });
     });
     viajeActivoSharePreference.getVieaje().then((value) {
-      if (value != null && value['estado'] != 'Terminado') {
+      if (value != null &&
+          (value['estado'] != 'Terminado' || value['estado'] != 'Cancelado')) {
         viaje = value;
         setState(() {
           iniciarViaje = true;
@@ -262,7 +264,16 @@ class _MapaPageState extends State<MapaPage> {
                                         child: BouncingWidget(
                                           duration: Duration(milliseconds: 100),
                                           scaleFactor: 1.5,
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            setState(() {
+                                              viajeActivoSharePreference
+                                                  .deletViaje();
+                                              viaje = null;
+                                              acceptService.cancelarService(
+                                                  viaje['Cancelado']);
+                                              polylines.clear();
+                                            });
+                                          },
                                           child: Card(
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -657,9 +668,7 @@ class _MapaPageState extends State<MapaPage> {
                                                                         print(snapshot2
                                                                             .data
                                                                             .data());
-                                                                        AcceptService
-                                                                            acceptService =
-                                                                            AcceptService();
+
                                                                         acceptService
                                                                             .acceptService(sitanciaFilter[index].id)
                                                                             .then((value) {
@@ -668,7 +677,8 @@ class _MapaPageState extends State<MapaPage> {
                                                                             viaje =
                                                                                 snapshot2.data.data();
                                                                             viaje.addAll(sitanciaFilter[index].data());
-
+                                                                            viaje['idViaje'] =
+                                                                                sitanciaFilter[index].id;
                                                                             viajeActivoSharePreference.saveVieaje(viaje);
                                                                             iniciarViaje =
                                                                                 true;
