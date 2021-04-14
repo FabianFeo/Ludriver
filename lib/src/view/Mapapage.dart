@@ -32,7 +32,7 @@ class _MapaPageState extends State<MapaPage> {
   bool iniciarViaje = false;
   Map<String, dynamic> user = Map();
   List<LatLng> polylineCoordinates = [];
-  Map<String, dynamic> viaje = Map();
+  Map<String, dynamic> viaje ;
   LatLng startCoordinates;
    Set<Polyline> polylines = Set();
   UserSharePreference userSharePreference = UserSharePreference();
