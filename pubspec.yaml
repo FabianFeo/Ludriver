@@ -50,9 +50,14 @@ dependencies:
   image_picker: ^0.7.3
   flutter_tindercard: ^0.2.0
   loading_gifs: ^0.3.0
+  flutter_launcher_icons: ^0.9.0
 
 
-
+flutter_icons:
+  android: "launcher_icon"
+  image_path_android: "assets/Icon/Lu_icono_driver.png"
+  image_path_ios: "assets/Icon/Lu_icono_driver.png"
+  ios: true 
   
   
 dependency_overrides:

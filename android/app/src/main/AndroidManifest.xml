@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" 
 package="com.example.luconductora">
   <application
-   android:label="luconductora"
-   android:icon="@mipmap/ic_launcher">
+   android:label="lü Driver"
+   android:icon="@mipmap/launcher_icon">
     <activity 
     android:name=".MainActivity" 
     android:launchMode="singleTop" 
