@@ -36,21 +36,7 @@ class _ChatRoomState extends State<ChatRoom> {
     );
   }
 
-  @override
-  void initState() {
-    getUserInfogetChats();
-    super.initState();
-  }
 
-  getUserInfogetChats() async {
-    ChatService().getUserChats(_user.firstName).then((snapshots) {
-      setState(() {
-        chatRooms = snapshots;
-        print(
-            "we got the data + ${chatRooms.toString()} this is name  ${_user.firstName}");
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +73,6 @@ class ChatRoomsTile extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => Chat(
-                      chatRoomId: chatRoomId,
                     )));
       },
       child: Container(

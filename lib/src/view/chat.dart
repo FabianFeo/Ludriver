@@ -1,167 +1,93 @@
-import 'package:luconductora/src/model/Driver.model.dart';
-import 'package:luconductora/src/service/chatService.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:luconductora/src/model/chatMessageModel.dart';
+import 'package:luconductora/src/service/chatService.dart';
 
 class Chat extends StatefulWidget {
-  final String chatRoomId;
-  Chat({this.chatRoomId});
-
   @override
   _ChatState createState() => _ChatState();
 }
 
 class _ChatState extends State<Chat> {
-  Stream<QuerySnapshot> chats;
-  User _user = User();
-  TextEditingController messageEditingController = new TextEditingController();
-  Widget chatMessages() {
-    return StreamBuilder(
-      stream: chats,
-      builder: (context, snapshot) {
-        return snapshot.hasData
-            ? ListView.builder(
-                itemCount: snapshot.data.documents.length,
-                itemBuilder: (context, index) {
-                  return MessageTile(
-                    message: snapshot.data.documents[index].data["message"],
-                    sendByMe: _user.firstName ==
-                        snapshot.data.documents[index].data["sendBy"],
-                  );
-                })
-            : Container();
-      },
-    );
-  }
+  ChatService chatService = ChatService();
+  List<ChatMessage> messages = [
+    ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
+    ChatMessage(
+        messageContent: "Hey Kriss, I am doing fine dude. wbu?",
+        messageType: "sender"),
+  ];
 
-  addMessage() {
-    if (messageEditingController.text.isNotEmpty) {
-      Map<String, dynamic> chatMessageMap = {
-        "sendBy": _user.firstName,
-        "message": messageEditingController.text,
-        'time': DateTime.now().millisecondsSinceEpoch,
-      };
-
-      ChatService().addMessage(widget.chatRoomId, chatMessageMap);
-
-      setState(() {
-        messageEditingController.text = "";
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    ChatService().getChats(widget.chatRoomId).then((val) {
-      setState(() {
-        chats = val;
-      });
-    });
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(101, 79, 168, 1),
-      ),
-      body: Container(
-        child: Stack(
-          children: [
-            chatMessages(),
-            Container(
-              alignment: Alignment.bottomCenter,
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-                color: Color(0x54FFFFFF),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: TextField(
-                      controller: messageEditingController,
-                      //style: simpleTextStyle(),
-                      decoration: InputDecoration(
-                          hintText: "Message ...",
-                          hintStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                          border: InputBorder.none),
-                    )),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        addMessage();
-                      },
-                      child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  colors: [
-                                    const Color(0x36FFFFFF),
-                                    const Color(0x0FFFFFFF)
-                                  ],
-                                  begin: FractionalOffset.topLeft,
-                                  end: FractionalOffset.bottomRight),
-                              borderRadius: BorderRadius.circular(40)),
-                          padding: EdgeInsets.all(12),
-                          child: Icon(Icons.send)),
-                    )
-                  ],
-                ),
+  _buildMessageComposer() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      margin: const EdgeInsets.only(top: 50),
+      height: 70.0,
+      color: Colors.white,
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: TextField(
+              textCapitalization: TextCapitalization.sentences,
+              onChanged: (value) {},
+              decoration: InputDecoration.collapsed(
+                hintText: 'Send a message...',
               ),
             ),
-          ],
-        ),
+          ),
+          IconButton(
+            icon: Icon(Icons.send),
+            iconSize: 25.0,
+            color: Theme.of(context).primaryColor,
+            onPressed: () {
+              chatService.addMessage();
+            },
+          ),
+        ],
       ),
     );
   }
-}
-
-class MessageTile extends StatelessWidget {
-  final String message;
-  final bool sendByMe;
-
-  MessageTile({@required this.message, @required this.sendByMe});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(
-          top: 8, bottom: 8, left: sendByMe ? 0 : 24, right: sendByMe ? 24 : 0),
-      alignment: sendByMe ? Alignment.centerRight : Alignment.centerLeft,
-      child: Container(
-        margin:
-            sendByMe ? EdgeInsets.only(left: 30) : EdgeInsets.only(right: 30),
-        padding: EdgeInsets.only(top: 17, bottom: 17, left: 20, right: 20),
-        decoration: BoxDecoration(
-            borderRadius: sendByMe
-                ? BorderRadius.only(
-                    topLeft: Radius.circular(23),
-                    topRight: Radius.circular(23),
-                    bottomLeft: Radius.circular(23))
-                : BorderRadius.only(
-                    topLeft: Radius.circular(23),
-                    topRight: Radius.circular(23),
-                    bottomRight: Radius.circular(23)),
-            gradient: LinearGradient(
-              colors: sendByMe
-                  ? [const Color(0xff007EF4), const Color(0xff2A75BC)]
-                  : [const Color(0x1AFFFFFF), const Color(0x1AFFFFFF)],
-            )),
-        child: Text(message,
-            textAlign: TextAlign.start,
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontFamily: 'OverpassRegular',
-                fontWeight: FontWeight.w300)),
-      ),
-    );
+        child: Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              title: Text('Chat'),
+              backgroundColor: Colors.purple,
+            ),
+            body: Stack(children: <Widget>[
+              ListView.builder(
+                itemCount: messages.length,
+                shrinkWrap: true,
+                padding: EdgeInsets.only(top: 10, bottom: 10),
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: EdgeInsets.only(
+                        left: 14, right: 14, top: 10, bottom: 10),
+                    child: Align(
+                      alignment: (messages[index].messageType == "receiver"
+                          ? Alignment.topLeft
+                          : Alignment.topRight),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: (messages[index].messageType == "receiver"
+                              ? Colors.grey.shade200
+                              : Colors.deepPurple[200]),
+                        ),
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          messages[index].messageContent,
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+              _buildMessageComposer()
+            ])));
   }
 }
