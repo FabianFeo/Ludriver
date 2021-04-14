@@ -155,8 +155,7 @@ class _MapaPageState extends State<MapaPage> {
                                           Container(
                                             margin: EdgeInsets.only(
                                                 top: height / 50),
-                                            child: Text(
-                                              'firstName',
+                                            child: Text( viaje['firstName'] + ' ',
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     102, 51, 204, 1),
@@ -167,8 +166,8 @@ class _MapaPageState extends State<MapaPage> {
                                           Container(
                                             margin: EdgeInsets.only(
                                                 top: height / 50),
-                                            child: Text(
-                                              'lastname',
+                                            child: Text( viaje['lastname']
+                                              ,
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     102, 51, 204, 1),
@@ -181,8 +180,7 @@ class _MapaPageState extends State<MapaPage> {
                                       Container(
                                         margin:
                                             EdgeInsets.only(top: height / 50),
-                                        child: Text(
-                                          'Punto de encuentro',
+                                        child: Text('Punto de encuentro',
                                           style: TextStyle(
                                               color: Color.fromRGBO(
                                                   102, 51, 204, 1),
@@ -196,8 +194,7 @@ class _MapaPageState extends State<MapaPage> {
                                         child: Container(
                                           height: height / 15,
                                           width: width / 1.5,
-                                          child: Text(
-                                            'direccionInicio',
+                                          child: Text(viaje['direccionInicio'],
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Color.fromRGBO(
@@ -222,8 +219,8 @@ class _MapaPageState extends State<MapaPage> {
                                             EdgeInsets.only(top: height / 50),
                                         child: Container(
                                           width: width / 1.5,
-                                          child: Text(
-                                            'direccionDestino',
+                                          child: Text(viaje['direccionDestino']
+                                            ,
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Color.fromRGBO(
@@ -245,11 +242,11 @@ class _MapaPageState extends State<MapaPage> {
                                       ),
                                       Container(
                                         margin:
-                                            EdgeInsets.only(top: height / 50),
+                                            EdgeInsets.only(top: height / 160),
                                         child: Container(
                                           width: width / 1.5,
-                                          child: Text(
-                                            'Valortotal',
+                                          child: Text(viaje['valor']
+                                            ,
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Color.fromRGBO(
