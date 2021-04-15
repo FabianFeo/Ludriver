@@ -16,8 +16,6 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:loading_gifs/loading_gifs.dart';
 
-
-
 class MapaPage extends StatefulWidget {
   MapaPage({Key key}) : super(key: key);
 
@@ -154,12 +152,12 @@ class _MapaPageState extends State<MapaPage> {
                                           margin:
                                               EdgeInsets.only(top: height / 80),
                                           child: Text(
-                                                'Viaje Aceptado',
-                                                style: TextStyle(
-                                                    color: Color.fromRGBO(
-                                                        102, 51, 204, 1),
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: height / 35),
+                                            'Viaje Aceptado',
+                                            style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    102, 51, 204, 1),
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: height / 35),
                                           )),
                                       Container(
                                           margin:
@@ -290,9 +288,10 @@ class _MapaPageState extends State<MapaPage> {
                                             setState(() {
                                               viajeActivoSharePreference
                                                   .deletViaje();
-                                              viaje = null;
                                               acceptService.cancelarService(
                                                   viaje['idViaje']);
+                                              viaje = null;
+
                                               polylines.clear();
                                             });
                                           },
