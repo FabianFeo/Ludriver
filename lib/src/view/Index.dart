@@ -1,6 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:luconductora/src/model/driver.model.dart';
+import 'package:luconductora/src/service/emailConfigService.dart';
+import 'package:luconductora/src/service/locationConfigService.dart';
+import 'package:luconductora/src/service/mensajesConfigService.dart';
+import 'package:luconductora/src/service/notificationConfigService.dart';
 import 'package:luconductora/src/view/BlogDriver.dart';
 import 'package:luconductora/src/view/BotonPanicoDriver.dart';
 import 'package:luconductora/src/view/ayuda.dart';
@@ -16,6 +20,10 @@ import 'package:luconductora/src/view/payment.dart';
 
 
 class Index extends StatefulWidget {
+  LocationConfigService _locationConfigService = LocationConfigService();
+  NotificationConfigService _notificationConfigService = NotificationConfigService();
+  MensajesConfigServices _mensajesConfigServices = MensajesConfigServices();
+  EmailConfigService _emailConfigService = EmailConfigService();
   Index({Key key}) : super(key: key);
 
   @override
@@ -32,6 +40,7 @@ class _IndexState extends State<Index> {
   @override
   void initState() {
     super.initState();
+    
   }
 
   @override
