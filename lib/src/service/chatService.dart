@@ -1,12 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:luconductora/src/service/DriverTravelPreference.dart';
 
 class ChatService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-  addMessage() async {
-    TravelSharePreferences travelSharePreferences = TravelSharePreferences();
-    Map travel = await travelSharePreferences.getTravel();
+  addMessage(Map travel) async {
     firestore
         .collection('viajes')
         .doc(travel['idViaje'])
@@ -14,7 +10,15 @@ class ChatService {
         .add({
       'Time': DateTime.now().millisecondsSinceEpoch,
       'messageDriver': 'hola',
-      'messageUser': 'hola usuario'
     });
+    getMessageDriver(travel);
+  }
+
+  Stream<QuerySnapshot> getMessageDriver(Map travel) {
+    return firestore
+        .collection('viajes')
+        .doc(travel['idViaje'])
+        .collection('chat').orderBy('Time')
+        .snapshots();
   }
 }

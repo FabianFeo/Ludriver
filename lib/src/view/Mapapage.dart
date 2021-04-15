@@ -69,6 +69,26 @@ class _MapaPageState extends State<MapaPage> {
   }
 
   @override
+  void reassemble() {
+    super.reassemble();
+    userSharePreference.getUser2().then((value) {
+      setState(() {
+        user = value;
+      });
+    });
+    viajeActivoSharePreference.getVieaje().then((value) {
+      if (value != null &&
+          (value['estado'] != 'Terminado' || value['estado'] != 'Cancelado')) {
+        viaje = value;
+        setState(() {
+          iniciarViaje = true;
+        });
+        getUbicationStream();
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
@@ -150,8 +170,9 @@ class _MapaPageState extends State<MapaPage> {
                                                     Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                Chat()));
+                                                            builder:
+                                                                (context) =>
+                                                                    Chat()));
                                                   },
                                                   child: Icon(Icons.message),
                                                   backgroundColor:
@@ -177,7 +198,8 @@ class _MapaPageState extends State<MapaPage> {
                                           Container(
                                             margin: EdgeInsets.only(
                                                 top: height / 50),
-                                            child: Text( viaje['firstName'] + ' ',
+                                            child: Text(
+                                              viaje['firstName'] + ' ',
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     102, 51, 204, 1),
@@ -188,8 +210,8 @@ class _MapaPageState extends State<MapaPage> {
                                           Container(
                                             margin: EdgeInsets.only(
                                                 top: height / 50),
-                                            child: Text( viaje['lastname']
-                                              ,
+                                            child: Text(
+                                              viaje['lastname'],
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     102, 51, 204, 1),
@@ -202,7 +224,8 @@ class _MapaPageState extends State<MapaPage> {
                                       Container(
                                         margin:
                                             EdgeInsets.only(top: height / 50),
-                                        child: Text('Punto de encuentro',
+                                        child: Text(
+                                          'Punto de encuentro',
                                           style: TextStyle(
                                               color: Color.fromRGBO(
                                                   102, 51, 204, 1),
@@ -216,7 +239,8 @@ class _MapaPageState extends State<MapaPage> {
                                         child: Container(
                                           height: height / 15,
                                           width: width / 1.5,
-                                          child: Text(viaje['direccionInicio'],
+                                          child: Text(
+                                            viaje['direccionInicio'],
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Color.fromRGBO(
@@ -241,8 +265,8 @@ class _MapaPageState extends State<MapaPage> {
                                             EdgeInsets.only(top: height / 50),
                                         child: Container(
                                           width: width / 1.5,
-                                          child: Text(viaje['direccionDestino']
-                                            ,
+                                          child: Text(
+                                            viaje['direccionDestino'],
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Color.fromRGBO(
@@ -267,8 +291,8 @@ class _MapaPageState extends State<MapaPage> {
                                             EdgeInsets.only(top: height / 160),
                                         child: Container(
                                           width: width / 1.5,
-                                          child: Text(viaje['valor']
-                                            ,
+                                          child: Text(
+                                            viaje['valor'],
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Color.fromRGBO(
