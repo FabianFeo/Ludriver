@@ -35,6 +35,8 @@ class _AuthActionButtonState extends State<AuthActionButton> {
     await _dataBaseService.saveData(predictedData);
     User user = User();
     user.facePatern = predictedData;
+    UserCollectionService userCollectionService = UserCollectionService();
+    userCollectionService.pushUser();
 
     /// resets the face stored in the face net sevice
     this._faceNetService.setPredictedData(null);
@@ -56,13 +58,7 @@ class _AuthActionButtonState extends State<AuthActionButton> {
           bool faceDetected = await widget.onPressed();
 
           if (faceDetected) {
-            widget.isLogin
-                ? loadFace(context)
-                : saveCara(context).then((value) {
-                    UserCollectionService userCollectionService =
-                        UserCollectionService();
-                    userCollectionService.pushUser();
-                  });
+            widget.isLogin ? loadFace(context) : saveCara(context);
           }
         } catch (e) {
           // If an error occurs, log the error to the console.
