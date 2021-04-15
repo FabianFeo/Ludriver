@@ -2,16 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  addMessage(Map travel) async {
-    firestore
+  Future<DocumentReference> addMessage(Map travel,String message) async {
+   return  firestore
         .collection('viajes')
         .doc(travel['idViaje'])
         .collection('chat')
         .add({
       'Time': DateTime.now().millisecondsSinceEpoch,
-      'messageDriver': 'hola',
+      'messageDriver': message,
     });
-    getMessageDriver(travel);
+   
   }
 
   Stream<QuerySnapshot> getMessageDriver(Map travel) {

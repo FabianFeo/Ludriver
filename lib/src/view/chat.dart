@@ -16,6 +16,7 @@ class _ChatState extends State<Chat> {
       ViajeActivoSharePreference();
   Map travel;
   List<ChatMessage> messages = [];
+  TextEditingController controller = TextEditingController();
   double height;
   double width;
   _buildMessageComposer() {
@@ -29,10 +30,17 @@ class _ChatState extends State<Chat> {
         children: <Widget>[
           Expanded(
             child: TextField(
+              controller: controller,
               textCapitalization: TextCapitalization.sentences,
-              onChanged: (value) {},
+              onChanged: (value) {
+                controller.text = value;
+                controller.value = TextEditingValue(text: value);
+                controller.selection = TextSelection.fromPosition(
+                  TextPosition(offset: controller.text.length),
+                );
+              },
               decoration: InputDecoration.collapsed(
-                hintText: 'Send a message...',
+                hintText: 'Envia un mensaje...',
               ),
             ),
           ),
@@ -41,7 +49,9 @@ class _ChatState extends State<Chat> {
             iconSize: 25.0,
             color: Theme.of(context).primaryColor,
             onPressed: () {
-              chatService.addMessage(travel);
+              chatService
+                  .addMessage(travel, controller.text)
+                  .then((value) => {controller.clear()});
             },
           ),
         ],
@@ -52,7 +62,11 @@ class _ChatState extends State<Chat> {
   @override
   void initState() {
     super.initState();
-    viajeActivoSharePreference.getVieaje().then((value) => travel = value);
+    viajeActivoSharePreference.getVieaje().then((value) {
+      setState(() {
+        travel = value;
+      });
+    });
   }
 
   @override
@@ -66,7 +80,8 @@ class _ChatState extends State<Chat> {
               title: Text('Chat'),
               backgroundColor: Colors.purple,
             ),
-            body: Stack(children: <Widget>[
+            body: SingleChildScrollView(
+                child: Stack(children: <Widget>[
               StreamBuilder(
                   stream: chatService.getMessageDriver(travel),
                   builder: (_, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -116,6 +131,6 @@ class _ChatState extends State<Chat> {
                     );
                   }),
               _buildMessageComposer()
-            ])));
+            ]))));
   }
 }
