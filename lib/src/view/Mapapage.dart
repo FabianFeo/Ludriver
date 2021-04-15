@@ -830,6 +830,7 @@ class _MapaPageState extends State<MapaPage> {
 
   getUbicationStream() {
     Geolocator.getPositionStream().listen((event) {
+   
       _createPolylines(LatLng(event.latitude, event.longitude),
           LatLng(viaje['latInicio'], viaje['lanInicio']));
     });
@@ -838,6 +839,7 @@ class _MapaPageState extends State<MapaPage> {
   _createPolylines(LatLng location, LatLng destino) async {
     // Initializing PolylinePoints
     polylinePoints = PolylinePoints();
+    polylineCoordinates=List();
 
     // Generating the list of coordinates to be used for
     // drawing the polylines
