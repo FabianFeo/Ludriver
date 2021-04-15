@@ -78,7 +78,7 @@ class _ChatState extends State<Chat> {
             backgroundColor: Colors.white,
             appBar: AppBar(
               title: Text('Chat'),
-              backgroundColor: Colors.purple,
+              backgroundColor: Color.fromRGBO(101, 79, 168, 1),
             ),
             body: SingleChildScrollView(
               
