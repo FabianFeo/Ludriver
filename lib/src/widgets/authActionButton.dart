@@ -4,6 +4,7 @@ import 'package:luconductora/src/service/faceNetService.dart';
 import 'package:luconductora/src/service/driverCollectionService.dart';
 //import 'package:NoEstasSola/src/view/index.dart';
 import 'package:flutter/material.dart';
+import 'package:luconductora/src/view/Carga.dart';
 import 'package:luconductora/src/view/index.dart';
 
 class AuthActionButton extends StatefulWidget {
@@ -74,6 +75,9 @@ class _AuthActionButtonState extends State<AuthActionButton> {
     if (_faceNetService.predict()) {
       Navigator.of(context).pop();
       Navigator.push(context, MaterialPageRoute(builder: (context) => Index()));
+    } else {
+      Navigator.of(context).pop();
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Carga()));
     }
   }
 

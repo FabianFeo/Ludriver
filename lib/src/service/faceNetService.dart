@@ -68,8 +68,8 @@ class FaceNetService {
 
   /// takes the predicted data previously saved and do inference
   bool predict() {
-    /// search closer user prediction if exists
-    return _searchResult(this._predictedData);
+    var predict = _searchResult(this._predictedData);
+    return predict == null ? false : predict;
   }
 
   /// _preProess: crops the image to be more easy

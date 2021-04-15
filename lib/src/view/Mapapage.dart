@@ -135,194 +135,198 @@ class _MapaPageState extends State<MapaPage> {
                                         BorderRadius.all(Radius.circular(15)),
                                     color: Color.fromRGBO(207, 197, 239, 1),
                                   ),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        child: GestureDetector(
-                                          child:
-                                              Icon(Icons.expand_more_outlined),
-                                          onTap: () {
-                                            setState(() {
-                                              iniciarViaje = false;
-                                            });
-                                          },
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          child: GestureDetector(
+                                            child: Icon(
+                                                Icons.expand_more_outlined),
+                                            onTap: () {
+                                              setState(() {
+                                                iniciarViaje = false;
+                                              });
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                      Container(
-                                          margin:
-                                              EdgeInsets.only(top: height / 80),
-                                          child: Text(
-                                            'Viaje Aceptado',
-                                            style: TextStyle(
-                                                color: Color.fromRGBO(
-                                                    102, 51, 204, 1),
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: height / 35),
-                                          )),
-                                      Container(
+                                        Container(
+                                            margin: EdgeInsets.only(
+                                                top: height / 80),
+                                            child: Text(
+                                              'Viaje Aceptado',
+                                              style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      102, 51, 204, 1),
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: height / 35),
+                                            )),
+                                        Container(
+                                            margin: EdgeInsets.only(
+                                                top: height / 50),
+                                            height: height / 7,
+                                            child: CircleAvatar(
+                                              radius: 60,
+                                              backgroundImage:
+                                                  AssetImage('Conductora.png'),
+                                            )),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  top: height / 50),
+                                              child: Text(
+                                                viaje['firstName'] + ' ',
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      102, 51, 204, 1),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  top: height / 50),
+                                              child: Text(
+                                                viaje['lastname'],
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      102, 51, 204, 1),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
                                           margin:
                                               EdgeInsets.only(top: height / 50),
-                                          height: height / 7,
-                                          child: CircleAvatar(
-                                            radius: 60,
-                                            backgroundImage:
-                                                AssetImage('Conductora.png'),
-                                          )),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: height / 50),
-                                            child: Text(
-                                              viaje['firstName'] + ' ',
-                                              style: TextStyle(
+                                          child: Text(
+                                            'Punto de encuentro',
+                                            style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     102, 51, 204, 1),
                                                 fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: height / 50),
-                                            child: Text(
-                                              viaje['lastname'],
-                                              style: TextStyle(
-                                                color: Color.fromRGBO(
-                                                    102, 51, 204, 1),
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: height / 50),
-                                        child: Text(
-                                          'Punto de encuentro',
-                                          style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  102, 51, 204, 1),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: height / 50),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: height / 50),
-                                        child: Container(
-                                          height: height / 15,
-                                          width: width / 1.5,
-                                          child: Text(
-                                            viaje['direccionInicio'],
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  102, 51, 204, 1),
-                                              fontWeight: FontWeight.w500,
-                                            ),
+                                                fontSize: height / 50),
                                           ),
                                         ),
-                                      ),
-                                      Container(
-                                        child: Text(
-                                          'Punto de destino',
-                                          style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  102, 51, 204, 1),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: height / 50),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: height / 50),
-                                        child: Container(
-                                          width: width / 1.5,
-                                          child: Text(
-                                            viaje['direccionDestino'],
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  102, 51, 204, 1),
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        child: Text(
-                                          'Valor del viaje',
-                                          style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  102, 51, 204, 1),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: height / 50),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: height / 160),
-                                        child: Container(
-                                          width: width / 1.5,
-                                          child: Text(
-                                            viaje['valor'],
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  102, 51, 204, 1),
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
+                                        Container(
+                                          margin:
+                                              EdgeInsets.only(top: height / 50),
                                           child: Container(
-                                        child: BouncingWidget(
-                                          duration: Duration(milliseconds: 100),
-                                          scaleFactor: 1.5,
-                                          onPressed: () {
-                                            setState(() {
-                                              viajeActivoSharePreference
-                                                  .deletViaje();
-                                              acceptService.cancelarService(
-                                                  viaje['idViaje']);
-                                              viaje = null;
-
-                                              polylines.clear();
-                                            });
-                                          },
-                                          child: Card(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(50.0),
-                                            ),
-                                            color:
-                                                Color.fromRGBO(101, 79, 168, 1),
-                                            child: Container(
-                                              width: width / 2,
-                                              height: height / 20,
-                                              child: Text(
-                                                "Cancelar viaje",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    color: Color.fromRGBO(
-                                                        255, 255, 255, 1),
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 30),
+                                            height: height / 15,
+                                            width: width / 1.5,
+                                            child: Text(
+                                              viaje['direccionInicio'],
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    102, 51, 204, 1),
+                                                fontWeight: FontWeight.w500,
                                               ),
                                             ),
                                           ),
                                         ),
-                                      )),
-                                    ],
+                                        Container(
+                                          child: Text(
+                                            'Punto de destino',
+                                            style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    102, 51, 204, 1),
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: height / 50),
+                                          ),
+                                        ),
+                                        Container(
+                                          margin:
+                                              EdgeInsets.only(top: height / 50),
+                                          child: Container(
+                                            width: width / 1.5,
+                                            child: Text(
+                                              viaje['direccionDestino'],
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    102, 51, 204, 1),
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          child: Text(
+                                            'Valor del viaje',
+                                            style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    102, 51, 204, 1),
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: height / 50),
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: height / 160),
+                                          child: Container(
+                                            width: width / 1.5,
+                                            child: Text(
+                                              viaje['valor'],
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    102, 51, 204, 1),
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                            child: Container(
+                                          child: BouncingWidget(
+                                            duration:
+                                                Duration(milliseconds: 100),
+                                            scaleFactor: 1.5,
+                                            onPressed: () {
+                                              setState(() {
+                                                viajeActivoSharePreference
+                                                    .deletViaje();
+                                                acceptService.cancelarService(
+                                                    viaje['idViaje']);
+                                                viaje = null;
+
+                                                polylines.clear();
+                                              });
+                                            },
+                                            child: Card(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(50.0),
+                                              ),
+                                              color: Color.fromRGBO(
+                                                  101, 79, 168, 1),
+                                              child: Container(
+                                                width: width / 2,
+                                                height: height / 20,
+                                                child: Text(
+                                                  "Cancelar viaje",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      color: Color.fromRGBO(
+                                                          255, 255, 255, 1),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 30),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                            )
                           ])))
                         : viaje == null
                             ? Center(

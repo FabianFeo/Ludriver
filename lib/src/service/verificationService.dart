@@ -15,5 +15,8 @@ Future loadFace(context) async {
   if (_faceNetService.predict()) {
     Navigator.of(context).pop();
     Navigator.push(context, MaterialPageRoute(builder: (context) => Index()));
+  }else{
+      Navigator.of(context).pop();
+      
   }
 }
