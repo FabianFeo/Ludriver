@@ -8,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as lo;
 import 'package:location/location.dart';
 import 'package:luconductora/src/service/DriverSharePreferences.dart';
+import 'package:luconductora/src/service/PositionDriverService.dart';
 import 'package:luconductora/src/service/serviceAcceptService.dart';
 import 'package:luconductora/src/service/viajeActivoSharePreference.dart';
 import 'package:luconductora/src/service/viajesService.dart';
@@ -830,7 +831,9 @@ class _MapaPageState extends State<MapaPage> {
 
   getUbicationStream() {
     Geolocator.getPositionStream().listen((event) {
-   
+      PositionDriverService positionDriverService = PositionDriverService();
+      positionDriverService.pushPosition(
+          viaje['idViaje'], event.latitude, event.longitude);
       _createPolylines(LatLng(event.latitude, event.longitude),
           LatLng(viaje['latInicio'], viaje['lanInicio']));
     });
@@ -839,7 +842,7 @@ class _MapaPageState extends State<MapaPage> {
   _createPolylines(LatLng location, LatLng destino) async {
     // Initializing PolylinePoints
     polylinePoints = PolylinePoints();
-    polylineCoordinates=List();
+    polylineCoordinates = List();
 
     // Generating the list of coordinates to be used for
     // drawing the polylines
