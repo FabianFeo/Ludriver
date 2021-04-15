@@ -314,7 +314,7 @@ class _MapaPageState extends State<MapaPage> {
                                                   .deletViaje();
                                               viaje = null;
                                               acceptService.cancelarService(
-                                                  viaje['Cancelado']);
+                                                  viaje['idViaje']);
                                               polylines.clear();
                                             });
                                           },
@@ -843,6 +843,7 @@ class _MapaPageState extends State<MapaPage> {
     // Initializing PolylinePoints
     polylinePoints = PolylinePoints();
     polylineCoordinates = List();
+    polylineCoordinates.clear();
 
     // Generating the list of coordinates to be used for
     // drawing the polylines
