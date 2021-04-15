@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:luconductora/src/view/chat.dart';
 import 'package:luconductora/src/view/mensajeria.dart';
 
 class MensajesDriver extends StatefulWidget {
@@ -137,7 +138,12 @@ class _MensajesDriverState extends State<MensajesDriver> {
                                   Icons.arrow_forward_ios_rounded,
                                   color: Colors.white,
                                 ),
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Chat()));
+                                },
                               ),
                             ),
                           ],

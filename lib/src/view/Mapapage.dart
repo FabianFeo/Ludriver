@@ -15,7 +15,7 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:loading_gifs/loading_gifs.dart';
 
-import 'chat.dart';
+
 
 class MapaPage extends StatefulWidget {
   MapaPage({Key key}) : super(key: key);
@@ -152,35 +152,13 @@ class _MapaPageState extends State<MapaPage> {
                                       Container(
                                           margin:
                                               EdgeInsets.only(top: height / 80),
-                                          child: Row(
-                                            children: <Widget>[
-                                              Text(
+                                          child: Text(
                                                 'Viaje Aceptado',
                                                 style: TextStyle(
                                                     color: Color.fromRGBO(
                                                         102, 51, 204, 1),
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: height / 35),
-                                              ),
-                                              Align(
-                                                alignment: Alignment(2, 0.1),
-                                                heightFactor: 0.5,
-                                                child: FloatingActionButton(
-                                                  onPressed: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder:
-                                                                (context) =>
-                                                                    Chat()));
-                                                  },
-                                                  child: Icon(Icons.message),
-                                                  backgroundColor:
-                                                      Color.fromRGBO(
-                                                          102, 51, 204, 1),
-                                                ),
-                                              )
-                                            ],
                                           )),
                                       Container(
                                           margin:
